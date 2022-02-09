@@ -8,7 +8,7 @@
         `-`**LES-4/TASK-4-classes-objects-and-methods**;  
         `-`**LES-5/TASK-5-arrays-and-collections**;  
         `-`**LES-6/TASK-6-exception-handling**;  
-        `-`**LES-7/TASK-7-sterilization-and-json**;  
+        `-`**LES-7/TASK-7-serialization-and-json**;  
     в данных ветках Вы будете выполнять соответствующее домашнее задание (название ветки соответствует теме лекций).  
     В данной работе нас интересует ветка **LES-1/TASK-1-git-practice**,  от которой созданы **feature/ignore-png-files** и  **feature/ignore-pdf-files**;
 2.  Создайте ветку **feature/txt-file** от **LES-1/TASK-1-git-practice** и переключитесь на нее;
