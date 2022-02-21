@@ -1,0 +1,17 @@
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.csproj.AssemblyReference.cache
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.GeneratedMSBuildEditorConfig.editorconfig
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.AssemblyInfoInputs.cache
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.AssemblyInfo.cs
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.csproj.CoreCompileInputs.cache
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Task5.exe
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Task5.deps.json
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Task5.runtimeconfig.json
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Task5.dll
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\ref\Task5.dll
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Task5.pdb
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.dll
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\ref\Task5.dll
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.pdb
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.genruntimeconfig.cache
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\bin\Debug\net6.0\Bogus.dll
+E:\iTechArt\.Net practice\!current git\MyTasks\Task5\obj\Debug\net6.0\Task5.csproj.CopyComplete
