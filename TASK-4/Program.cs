@@ -4,9 +4,9 @@ var random = new Random();
 
 var numberOfObjects = random.Next(5, 20);
 
-List<Candidate> listOfObjectsCandidates = new List<Candidate>();
-List<Employee> listOfObjectsEmployees = new List<Employee>();
-for (int i = 0; i < numberOfObjects; i++)
+var listOfObjectsCandidates = new List<Candidate>();
+var listOfObjectsEmployees = new List<Employee>();
+for (var i = 0; i < numberOfObjects; i++)
 {
     var candidate = new Candidate();
     

@@ -22,7 +22,7 @@ public class EmployeeReportGenerator : IReportGenerator
         
         Console.WriteLine("{0,36} | {1,20} | {2, 40} | {3,8} | {4, 25}",
             "Id:", "Name Surname:", "Position:", "Salary:", "Company name:");
-        for (int i = 0; i < DescendingSort().Count(); i++)
+        for (var i = 0; i < DescendingSort().Count(); i++)
         {
             var sorted = DescendingSort();
             

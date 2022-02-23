@@ -10,7 +10,7 @@ public class Candidate : User, IUserInfo
 
     public void ShowUserInfo()
     {
-        int typecastedSalary = (int)DesiredSalary;
+        var typecastedSalary = (int)DesiredSalary;
         
         Console.WriteLine(
             $"Hello, I am {Name} {Surname}, I want to be a {DesiredPosition} ({PositionDescription}) with a salary from {typecastedSalary}");
