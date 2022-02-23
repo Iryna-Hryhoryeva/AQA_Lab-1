@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_1", "Task2_1\Task2_1.csproj", "{EBF89724-1958-4B62-BFAE-5BD74C6C42D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TASK-2_1", "TASK-2_1\TASK-2_1.csproj", "{EBF89724-1958-4B62-BFAE-5BD74C6C42D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2_2", "Task2_2\Task2_2.csproj", "{6413A7B4-1232-4FE1-A28D-62F12729C292}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TASK-2_2", "TASK-2_2\TASK-2_2.csproj", "{6413A7B4-1232-4FE1-A28D-62F12729C292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
