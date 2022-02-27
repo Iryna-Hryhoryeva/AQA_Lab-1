@@ -2,16 +2,19 @@ namespace Task2_2;
 
 public static class CurrencyConverter
 {
-    public static double MoneyAmount { get; set; }
-    public static string UserInput { get; set; }
+    private static double MoneyAmount { get; set; }
 
-    public static double RatioIn { get; set; }
-    public static double RatioOut { get; set; }
-    public static string TargetCurrency { get; set; }
+    private static string UserInput { get; set; }
+
+    private static double RatioIn { get; set; }
+
+    private static double RatioOut { get; set; }
+
+    private static string TargetCurrency { get; set; }
 
     public static double GetRatio(string name)
     {
-        if (Enum.TryParse(name, out Currency.Name enumName))
+        if (Enum.TryParse(name, out Currency enumName))
         {
             return Data.Ratio[(int) enumName];
         }
@@ -24,7 +27,7 @@ public static class CurrencyConverter
 
     public static byte GetInputData()
     {
-        double ratio = 0;
+        double ratio;
         do
         {
             Console.Write(

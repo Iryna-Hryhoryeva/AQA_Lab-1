@@ -4,24 +4,31 @@ namespace Task2_1;
 
 public class Chatbot
 {
-    public string UserName { get; set; }
-    public string UserSurname { get; set; }
+    public Chatbot(string userSurname, string userName, DateTime date)
+    {
+        UserSurname = userSurname;
+        UserName = userName;
+        Date = date;
+    }
 
-    public DateTime Date { get; set; }
+    private string UserSurname { get; set; }
+    
+    private string UserName { get; set; }
 
-    public static string InputName(int nameType)
+    private DateTime Date { get; set; }
+
+    public static string InputName(string username)
     {
         string name;
         const string pattern = @"\d*\s*\W*";
-        const string target = "";
         var regex = new Regex(pattern);
 
         do
         {
-            Console.Write("Введите Ваш" + (nameType == 1 ? "у фамилию: " : "е имя: "));
+            Console.Write("Введите Ваш" + (username == "surname" ? "у фамилию: " : "е имя: "));
             name = Console.ReadLine();
-            name = regex.Replace(name, target);
-        } while (name == ""); // проверка на пустую строку
+            name = regex.Replace(name, "");
+        } while (String.IsNullOrEmpty(name));
 
         name = name.Substring(0, 1).ToUpper() + name.Substring(1);
 
@@ -37,11 +44,11 @@ public class Chatbot
         do
         {
             Console.Write(message);
-            try // обработка ошибок
+            try
             {
                 date = DateTime.Parse(Console.ReadLine());
             }
-            catch (Exception e) // сюда попадает в случае ошибки
+            catch (Exception e)
             {
                 Console.WriteLine("Введена некорректная дата (" + e.Message + ")");
                 message = "Пожалуйста, введите актуальную дату в формате дд/мм/гггг: ";

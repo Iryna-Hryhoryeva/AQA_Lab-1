@@ -1,13 +1,15 @@
-﻿using Task2_2;
+﻿namespace Task2_2;
 
-Console.Write("Здравствуйте! ");
-
-//Ввод суммы в исходной валюте и получение коэффициента
-while (CurrencyConverter.GetInputData() == 1)
+public static class Program
 {
-    // Назначение валюты обмена и получение коэффициента
-    CurrencyConverter.ChooseTargetCurrency();
+    public static void Main(string[] args)
+    {
+        Console.Write("Здравствуйте! ");
 
-    // расчет итоговой суммы с учетом снятых процетнов
-    CurrencyConverter.ShowResult();
+        while (CurrencyConverter.GetInputData() == 1)
+        {
+            CurrencyConverter.ChooseTargetCurrency();
+            CurrencyConverter.ShowResult();
+        }
+    }
 }
