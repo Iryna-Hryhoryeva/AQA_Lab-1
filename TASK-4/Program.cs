@@ -1,43 +1,50 @@
-﻿using Persons;
+﻿namespace Persons;
 
-var random = new Random();
-
-var numberOfObjects = random.Next(5, 20);
-
-var listOfObjectsCandidates = new List<Candidate>();
-var listOfObjectsEmployees = new List<Employee>();
-for (var i = 0; i < numberOfObjects; i++)
+public class Program
 {
-    var candidate = new Candidate();
-    
-    listOfObjectsCandidates.Add(candidate);
-    var employee = new Employee();
-    
-    listOfObjectsEmployees.Add(employee);
+    public static void Main (string[] args)
+    {
+        var random = new Random();
+
+        var numberOfObjects = random.Next(5, 20);
+
+        var listOfObjectsCandidates = new List<Candidate>();
+
+        var listOfObjectsEmployees = new List<Employee>();
+
+        for (var i = 0; i < numberOfObjects; i++)
+        {
+            var candidate = new Candidate();
+
+            listOfObjectsCandidates.Add(candidate);
+            var employee = new Employee();
+
+            listOfObjectsEmployees.Add(employee);
+        }
+
+        var repository = new PersonsRepository();
+
+        var candidates = repository.GetCandidates(listOfObjectsCandidates);
+
+        var employees = repository.GetEmployees(listOfObjectsEmployees);
+
+        Console.WriteLine("\n");
+
+        candidates.ElementAt(0).ShowUserInfo();
+
+        Console.WriteLine("\n");
+
+        var reportEmployees = new EmployeeReportGenerator(employees);
+        reportEmployees.Report();
+
+        Console.WriteLine("\n");
+
+        var reportCandidates = new CandidateReportGenerator(candidates);
+        reportCandidates.Report();
+
+        Console.WriteLine("\n");
+        var userFactory = new UserFactory();
+
+        userFactory.UserObject();
+    }
 }
-
-// заполненение первичных данных из библиотеки
-var repository = new PersonsRepository();
-
-var candidates = repository.GetCandidates(listOfObjectsCandidates);
-
-var employees = repository.GetEmployees(listOfObjectsEmployees);
-
-Console.WriteLine("\n");
-
-candidates.ElementAt(0).ShowUserInfo();
-
-Console.WriteLine("\n");
-
-var reportEmployees = new EmployeeReportGenerator(employees);
-reportEmployees.Report();
-
-Console.WriteLine("\n");
-var reportCandidates = new CandidateReportGenerator(candidates);
-
-reportCandidates.Report();
-
-Console.WriteLine("\n");
-var userFactory = new UserFactory();
-
-userFactory.UserObject();

@@ -4,35 +4,35 @@ namespace Persons;
 
 public class PersonsRepository
 {
+    private readonly string[] companyNames = { "Z", "Apple", "Yandex", "Google" };
+    private readonly string[] desiredPositions = { "Dynamic Identity Engineer",
+      "Dynamic Intranet Facilitator","Global Creative Engineer", "Internal Markets Agent", "International Accounts Representative" };
+
     public IEnumerable<Candidate> GetCandidates(List<Candidate> listOfObjects)
     {
-        // Randomizer.Seed = new Random(123456);
-
         var candidateGenerator = new Faker<Candidate>()
             .RuleFor(c => c.Id, Guid.NewGuid())
             .RuleFor(c => c.Name, (f, c) => f.Name.FirstName())
             .RuleFor(c => c.Surname, (f, c) => f.Name.LastName())
-            .RuleFor(c => c.DesiredPosition, (f, c) => f.Name.JobTitle())
+            .RuleFor(c => c.DesiredPosition, f => f.PickRandom(desiredPositions))
             .RuleFor(c => c.PositionDescription, (f, c) => f.Name.JobDescriptor())
-            .RuleFor(o => o.DesiredSalary, f => f.Random.Double(0, 10000));
+            .RuleFor(c => c.DesiredSalary, f => f.Random.Double(500, 10000));
         return candidateGenerator.Generate(listOfObjects.Count);
     }
 
     public IEnumerable<Employee> GetEmployees(List<Employee> listOfObjects)
     {
         var employeeGenerator = new Faker<Employee>()
-            .RuleFor(o => o.Id, Guid.NewGuid)
-            .RuleFor(c => c.Name, (f, c) => f.Name.FirstName())
-            .RuleFor(c => c.Surname, (f, c) => f.Name.LastName())
-            // .RuleFor(o => o.Date, f => f.Date.Past(3))
-            .RuleFor(c => c.Position, (f, c) => f.Name.JobTitle())
-            .RuleFor(c => c.PositionDescription, (f, c) => f.Name.JobDescriptor())
-            .RuleFor(o => o.Salary, f => f.Random.Double(0, 10000))
-            // .RuleFor(o => o.Shipped, f => f.Random.Bool(0.9f));
-            .RuleFor(c => c.CompanyName, f => f.Company.CompanyName())
-            .RuleFor(c => c.CompanyAddress, f => f.Address.FullAddress())
-            .RuleFor(c => c.CompanyCity, f => f.Address.City())
-            .RuleFor(c => c.CompanyCountry, f => f.Address.Country());
+            .RuleFor(e => e.Id, Guid.NewGuid)
+            .RuleFor(e => e.Name, (f, e) => f.Name.FirstName())
+            .RuleFor(e => e.Surname, (f, e) => f.Name.LastName())
+            .RuleFor(e => e.Position, (f, e) => f.Name.JobTitle())
+            .RuleFor(e => e.PositionDescription, (f, e) => f.Name.JobDescriptor())
+            .RuleFor(e => e.Salary, f => f.Random.Double(500, 10000))
+            .RuleFor(e => e.CompanyName, f => f.PickRandom(companyNames))
+            .RuleFor(e => e.CompanyAddress, f => f.Address.FullAddress())
+            .RuleFor(e => e.CompanyCity, f => f.Address.City())
+            .RuleFor(e => e.CompanyCountry, f => f.Address.Country());
         return employeeGenerator.Generate(listOfObjects.Count);
     }
 }

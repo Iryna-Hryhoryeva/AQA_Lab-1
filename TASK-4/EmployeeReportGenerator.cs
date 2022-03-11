@@ -2,34 +2,31 @@ namespace Persons;
 
 public class EmployeeReportGenerator : IReportGenerator
 {
-    // отсортировывает всех работников по компании и по убыванию зп.
-    // ***Вывод : UserId || Company Name || Users Full Name || Salary***
-
     public IEnumerable<Employee> ListOfEmployees;
 
-    public EmployeeReportGenerator(IEnumerable<Employee> pear)
+    public EmployeeReportGenerator(IEnumerable<Employee> listOfEmployees)
     {
-        ListOfEmployees = pear;
-    }
-
-    public IEnumerable<Employee> DescendingSort()
-    {
-        return ListOfEmployees.OrderByDescending(e => String.Format("{0,70}{1,10}", e.CompanyName, e.Salary));
+        ListOfEmployees = listOfEmployees;
     }
 
     public void Report()
     {
-        
-        Console.WriteLine("{0,36} | {1,20} | {2, 40} | {3,8} | {4, 25}",
-            "Id:", "Name Surname:", "Position:", "Salary:", "Company name:");
-        for (var i = 0; i < DescendingSort().Count(); i++)
+        const string template = "{0,36} | {1,25} | {2, 40} | {3,8} | {4, -30}";
+        Console.WriteLine(template, "Id:", "Name Surname:", "Position:", "Salary:", "Company name:");
+
+        var orderedEmployees = from selectedEmployee in ListOfEmployees
+                               orderby selectedEmployee.CompanyName, selectedEmployee.Salary descending
+                               select selectedEmployee;
+        Employee employee;
+
+        for (int i = 0; i < orderedEmployees.Count(); i++)
         {
-            var sorted = DescendingSort();
-            
-            Console.WriteLine("{0,36} | {1,20} | {2, 40} | {3, 8} | {4, 25}", sorted.ElementAt(i).Id,
-                sorted.ElementAt(i).Name + " " + sorted.ElementAt(i).Surname,
-                sorted.ElementAt(i).Position, Math.Round(sorted.ElementAt(i).Salary, 2, MidpointRounding.ToEven),
-                sorted.ElementAt(i).CompanyName);
+            employee = orderedEmployees.ElementAt(i);
+
+            Console.WriteLine(template, employee.Id,
+                employee.Name + " " + employee.Surname,
+                employee.Position, Math.Round(employee.Salary, 2, MidpointRounding.ToEven),
+                employee.CompanyName);
         }
     }
 }

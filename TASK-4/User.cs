@@ -1,16 +1,24 @@
+namespace Persons;
+
 public class User
 {
-    public Guid Id { get; set; }
+    private Guid _id;
+    private string _name;
+    private string _surname;
 
-    public string Name { get; set; }
-
-    public string Surname { get; set; }
-
-    // DEV_NOTE: May be used someday...
-    // public User(Guid id, string name, string surname)
-    // {
-    //     this.id = id;
-    //     this.name = name;
-    //     this.surname = surname;
-    // }
+    public Guid Id
+    {
+        get { return _id; }
+        set { _id = value; }
+    }
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+    public string Surname
+    {
+        get { return _surname; }
+        set { _surname = value; }
+    }
 }

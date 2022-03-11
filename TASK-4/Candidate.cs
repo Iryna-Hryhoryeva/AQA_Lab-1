@@ -1,12 +1,28 @@
-using Persons;
+namespace Persons;
 
 public class Candidate : User, IUserInfo
 {
-    public string DesiredPosition { get; set; }
+    private string _desiredPosition;
+    private string _positionDescription;
+    private double _desiredSalary;
 
-    public string PositionDescription { get; set; }
+    public string DesiredPosition
+    {
+        get { return _desiredPosition; }
+        set { _desiredPosition = value; }
+    }
 
-    public double DesiredSalary { get; set; }
+    public string PositionDescription
+    {
+        get { return _positionDescription; }
+        set { _positionDescription = value; }
+    }
+
+    public double DesiredSalary
+    {
+        get { return _desiredSalary; }
+        set { _desiredSalary = value; }
+    }
 
     public void ShowUserInfo()
     {
