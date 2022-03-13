@@ -123,6 +123,7 @@ public class JsonShops
             string phoneChoice;
             var found = new List<Phone>();
             var phone = new Phone();
+
             do
             {
                 try

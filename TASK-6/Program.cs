@@ -28,7 +28,6 @@ public class Program
 
         var chosenPhone = Shops.FindPhone();
         var chosenShop = Shops.ChooseShop(chosenPhone);
-
         var selectedPhone = FoundPhones.Find(p => p.Model == chosenPhone && p.ShopId == chosenShop.Id);
 
         var order = new JsonShops.Order(selectedPhone, chosenShop);
