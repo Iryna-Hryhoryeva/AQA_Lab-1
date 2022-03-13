@@ -12,9 +12,7 @@ public class Chatbot
     }
 
     private string UserSurname { get; set; }
-    
     private string UserName { get; set; }
-
     private DateTime Date { get; set; }
 
     public static string InputName(string username)
@@ -41,6 +39,7 @@ public class Chatbot
         var date = new DateTime();
         int comparisonResult;
         var message = "Введите дату в формате дд/мм/гггг: ";
+
         do
         {
             Console.Write(message);
