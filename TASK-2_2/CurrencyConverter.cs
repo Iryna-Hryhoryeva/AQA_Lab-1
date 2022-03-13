@@ -3,13 +3,9 @@ namespace Task2_2;
 public static class CurrencyConverter
 {
     private static double MoneyAmount { get; set; }
-
     private static string UserInput { get; set; }
-
     private static double RatioIn { get; set; }
-
     private static double RatioOut { get; set; }
-
     private static string TargetCurrency { get; set; }
 
     public static double GetRatio(string name)
@@ -28,12 +24,14 @@ public static class CurrencyConverter
     public static byte GetInputData()
     {
         double ratio;
+
         do
         {
             Console.Write(
                 "Введите сумму, которую хотите конвертировать. Например: 1000 USD (для выхода нажмите 0): ");
 
             UserInput = Console.ReadLine();
+
             if (UserInput == "0")
             {
                 return 0;
@@ -42,6 +40,7 @@ public static class CurrencyConverter
             var data = UserInput.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             MoneyAmount = double.Parse(data[0]);
             ratio = GetRatio(data[1]);
+
         } while (ratio == 0);
 
         RatioIn = ratio;
@@ -51,6 +50,7 @@ public static class CurrencyConverter
     public static void ChooseTargetCurrency()
     {
         double ratio;
+
         do
         {
             Console.WriteLine("Выберите валюту конвертации: USD, EUR, RUB");
