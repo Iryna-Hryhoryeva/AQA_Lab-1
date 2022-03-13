@@ -5,8 +5,6 @@ public class BogusRepository
 {
     public IEnumerable<Ware> GetWares(List<Ware> listOfWares)
     {
-        Randomizer.Seed = new Random(123456);
-
         var wareGenerator = new Faker<Ware>()
             .RuleFor(w => w.Id, (f, w) => f.Commerce.Ean8())
             .RuleFor(w => w.Name, (f, w) => f.Commerce.ProductName())
