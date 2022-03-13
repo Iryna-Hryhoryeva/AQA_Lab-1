@@ -2,10 +2,15 @@ namespace Task5;
 
 public class Customer
 {
-    public string PassportId { get; set; }
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public Cart Cart { get; set; }
+    private string _passportId;
+    private string _name;
+    private int _age;
+    private Cart _cart;
+
+    public string PassportId { get => _passportId; set => _passportId = value; }
+    public string Name { get => _name; set => _name = value; } 
+    public int Age { get => _age; set => _age = value; }
+    public Cart Cart { get => _cart; set => _cart = value; }
 
     public void SetCustomer(string passportId, string name, int age, Cart cart)
     {
