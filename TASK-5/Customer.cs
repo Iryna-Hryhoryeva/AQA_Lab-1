@@ -3,11 +3,8 @@ namespace Task5;
 public class Customer
 {
     public string PassportId { get; set; }
-    
     public string Name { get; set; }
-    
     public int Age { get; set; }
-    
     public Cart Cart { get; set; }
 
     public void SetCustomer(string passportId, string name, int age, Cart cart)
