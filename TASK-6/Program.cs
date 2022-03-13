@@ -4,9 +4,11 @@ namespace TASK_6;
 
 public class Program
 {
-    public static JsonShops.AllShops shops;
+    private static JsonShops.AllShops _shops;
+    private static List<JsonShops.Phone> _foundPhones;
 
-    public static List<JsonShops.Phone> foundPhones;
+    public static JsonShops.AllShops Shops { get => _shops; set => _shops = value; }
+    public static List<JsonShops.Phone> FoundPhones { get => _foundPhones; set => _foundPhones = value; }
 
     public static void Main(string[] args)
     {
@@ -16,18 +18,18 @@ public class Program
             json = streamReader.ReadToEnd();
         }
 
-        shops = JsonConvert.DeserializeObject<JsonShops.AllShops>(json);
+        Shops = JsonConvert.DeserializeObject<JsonShops.AllShops>(json);
         Console.WriteLine();
 
-        foreach (var shop in shops.Shops)
+        foreach (var shop in Shops.Shops)
         {
             shop.Report();
         }
 
-        var chosenPhone = shops.FindPhone();
-        var chosenShop = shops.ChooseShop(chosenPhone);
+        var chosenPhone = Shops.FindPhone();
+        var chosenShop = Shops.ChooseShop(chosenPhone);
 
-        var selectedPhone = foundPhones.Find(p => p.Model == chosenPhone && p.ShopId == chosenShop.Id);
+        var selectedPhone = FoundPhones.Find(p => p.Model == chosenPhone && p.ShopId == chosenShop.Id);
 
         var order = new JsonShops.Order(selectedPhone, chosenShop);
         var json2 = JsonConvert.SerializeObject(order);

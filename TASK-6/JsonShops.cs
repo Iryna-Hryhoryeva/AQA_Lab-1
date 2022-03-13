@@ -8,12 +8,13 @@ public class JsonShops
     public class Order
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private Guid _id;
+        private Phone _phone;
+        private Shop _shop;
 
-        public Guid Id;
-
-        public Phone Phone;
-
-        public Shop Shop;
+        public Guid Id { get => _id; set => _id = value; }
+        public Phone Phone { get => _phone; set => _phone = value; }
+        public Shop Shop { get => _shop; set => _shop = value; }
 
         public Order(Phone phone, Shop shop)
         {
@@ -27,38 +28,40 @@ public class JsonShops
     public class Phone
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private string _model;
+        private string _operationSystemType;
+        private string _marketLaunchDate;
+        private string _price;
+        private bool _isAvailable;
+        private int _shopId;
 
-        public string Model { get; set; }
-
-        public string OperationSystemType { get; set; }
-
-        public string MarketLaunchDate { get; set; }
-
-        public string Price { get; set; }
-
-        public bool IsAvailable { get; set; }
-
-        public int ShopId { get; set; }
+        public string Model { get => _model; set => _model = value; }
+        public string OperationSystemType { get => _operationSystemType; set => _operationSystemType = value; }
+        public string MarketLaunchDate { get => _marketLaunchDate; set => _marketLaunchDate = value; }
+        public string Price { get => _price; set => _price = value; }
+        public bool IsAvailable { get => _isAvailable; set => _isAvailable = value; }
+        public int ShopId { get => _shopId; set => _shopId = value; }
 
         public void Report()
         {
             logger.Info(
                 $"Модель: {Model}, тип ОС: {OperationSystemType}, дата выпуска: {MarketLaunchDate}, " +
-                $"стоимость: {Price}, магазин: {Program.shops.ShopByNumber(ShopId)}\n");
+                $"стоимость: {Price}, магазин: {Program.Shops.ShopByNumber(ShopId)}\n");
         }
     }
 
     public class Shop
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private int _id;
+        private string _name;
+        private string _description;
+        private List<Phone> _phones;
 
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public List<Phone> Phones { get; set; }
+        public int Id { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+        public string Description { get => _description; set => _description = value; }
+        public List<Phone> Phones { get => _phones; set => _phones = value; }
 
         public int CountPhonesWithOsType(string osType)
         {
@@ -79,9 +82,9 @@ public class JsonShops
     public class AllShops
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private List<Shop> _shops;
 
-        public List<Shop> Shops { get; set; }
-
+        public List<Shop> Shops { get => _shops; set => _shops = value; }
 
         public string ShopByNumber(int shopId)
         {
@@ -136,14 +139,14 @@ public class JsonShops
                         }
                     }
 
-                    Program.foundPhones = found;
+                    Program.FoundPhones = found;
 
-                    if (Program.foundPhones.Count == 0)
+                    if (Program.FoundPhones.Count == 0)
                     {
                         logger.Info("Введенный Вами товар не найден");
                     }
 
-                    var inStorage = Program.foundPhones.Find(p => p.IsAvailable);
+                    var inStorage = Program.FoundPhones.Find(p => p.IsAvailable);
 
                     if (inStorage == null)
                     {
@@ -152,7 +155,7 @@ public class JsonShops
                     }
                     else
                     {
-                        var successfulRequest = Program.foundPhones.FindAll(p => p.IsAvailable);
+                        var successfulRequest = Program.FoundPhones.FindAll(p => p.IsAvailable);
                         successfulRequest.ForEach(p => p.Report());
 
                         break;
