@@ -4,16 +4,16 @@ namespace Task2_1;
 
 public class Chatbot
 {
+    private string _userSurname { get; set; }
+    private string _userName { get; set; }
+    private DateTime _date { get; set; }
+
     public Chatbot(string userSurname, string userName, DateTime date)
     {
-        UserSurname = userSurname;
-        UserName = userName;
-        Date = date;
+        _userSurname = userSurname;
+        _userName = userName;
+        _date = date;
     }
-
-    private string UserSurname { get; set; }
-    private string UserName { get; set; }
-    private DateTime Date { get; set; }
 
     public static string InputName(string username)
     {
@@ -62,6 +62,6 @@ public class Chatbot
     public static void ShowResult(Chatbot ticket, string time)
     {
         Console.WriteLine(
-            $"{ticket.UserSurname} {ticket.UserName}, Вы записаны на прием {ticket.Date.ToString("d")}, {time}");
+            $"{ticket._userSurname} {ticket._userName}, Вы записаны на прием {ticket._date.ToString("d")}, {time}");
     }
 }
