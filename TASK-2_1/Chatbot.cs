@@ -4,9 +4,9 @@ namespace Task2_1;
 
 public class Chatbot
 {
-    private string _userSurname { get; set; }
-    private string _userName { get; set; }
-    private DateTime _date { get; set; }
+    private string _userSurname;
+    private string _userName;
+    private DateTime _date;
 
     public Chatbot(string userSurname, string userName, DateTime date)
     {
