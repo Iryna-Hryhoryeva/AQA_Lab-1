@@ -106,17 +106,6 @@ public class Program
 
                     var found = users.Where(u => u.Equals(newCustomer)).Count() > 0;
 
-                    // DEV_NOTE: can be used instead of LINQ
-                    // for (var i = 0; i < users.Count; i++)
-                    // {
-                    //     if (users[i].Equals(newCustomer))
-                    //     {
-                    //         found = true;
-                    //
-                    //         Console.WriteLine("Покупатель не добавлен, т.к. такой уже существует");
-                    //     }
-                    // }
-
                     if (found)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
