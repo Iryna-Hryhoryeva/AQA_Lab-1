@@ -2,11 +2,11 @@ namespace Persons;
 
 public class CandidateReportGenerator : IReportGenerator
 {
-    public IEnumerable<Candidate> ListOfCandidates;
+    private IEnumerable<Candidate> _listOfCandidates;
 
     public CandidateReportGenerator(IEnumerable<Candidate> listOfCandidates)
     {
-        ListOfCandidates = listOfCandidates;
+        _listOfCandidates = listOfCandidates;
     }
 
     public void Report()
@@ -15,13 +15,14 @@ public class CandidateReportGenerator : IReportGenerator
 
         Console.WriteLine(template,
             "Id:", "Name Surname:", "Desired position:", "Position description:", "Desired salary:");
-        for (int i = 0; i < ListOfCandidates.Count(); i++)
+        
+        for (int i = 0; i < _listOfCandidates.Count(); i++)
         {
-            var orderedCandidates = from selectedCandidate in ListOfCandidates
+            var orderedCandidates = from selectedCandidate in _listOfCandidates
                                     orderby selectedCandidate.DesiredPosition, selectedCandidate.DesiredSalary
                                     select selectedCandidate;
 
-            Candidate candidate = orderedCandidates.ElementAt(i);
+            var candidate = orderedCandidates.ElementAt(i);
 
             Console.WriteLine(template, candidate.Id,
                 candidate.Name + " " + candidate.Surname,

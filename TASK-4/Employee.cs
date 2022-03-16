@@ -48,17 +48,10 @@ public class Employee : User, IUserInfo
 
     public void ShowUserInfo()
     {
-        Name = Name;
-        Surname = Surname;
-        Position = Position;
-        Salary = Salary;
-        CompanyName = CompanyName;
-        CompanyCountry = CompanyCountry;
-        CompanyCity = CompanyCity;
-        CompanyAddress = CompanyAddress;
+        var typecastedSalary = Math.Round(Salary, 2);
 
         Console.WriteLine(
             $"Hello, I am {Name} {Surname}, {Position} in {CompanyName} ({CompanyCountry}, {CompanyCity}, " +
-            $"{CompanyAddress}) and my salary is {Salary}");
+            $"{CompanyAddress}) and my salary is {typecastedSalary}");
     }
 }

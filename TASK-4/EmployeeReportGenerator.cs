@@ -2,11 +2,11 @@ namespace Persons;
 
 public class EmployeeReportGenerator : IReportGenerator
 {
-    public IEnumerable<Employee> ListOfEmployees;
+    private IEnumerable<Employee> _listOfEmployees;
 
     public EmployeeReportGenerator(IEnumerable<Employee> listOfEmployees)
     {
-        ListOfEmployees = listOfEmployees;
+        _listOfEmployees = listOfEmployees;
     }
 
     public void Report()
@@ -14,14 +14,13 @@ public class EmployeeReportGenerator : IReportGenerator
         const string template = "{0,36} | {1,25} | {2, 40} | {3,8} | {4, -30}";
         Console.WriteLine(template, "Id:", "Name Surname:", "Position:", "Salary:", "Company name:");
 
-        var orderedEmployees = from selectedEmployee in ListOfEmployees
+        var orderedEmployees = from selectedEmployee in _listOfEmployees
                                orderby selectedEmployee.CompanyName, selectedEmployee.Salary descending
                                select selectedEmployee;
-        Employee employee;
 
         for (int i = 0; i < orderedEmployees.Count(); i++)
         {
-            employee = orderedEmployees.ElementAt(i);
+            var employee = orderedEmployees.ElementAt(i);
 
             Console.WriteLine(template, employee.Id,
                 employee.Name + " " + employee.Surname,

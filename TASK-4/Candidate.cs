@@ -29,6 +29,7 @@ public class Candidate : User, IUserInfo
         var typecastedSalary = (int)DesiredSalary;
         
         Console.WriteLine(
-            $"Hello, I am {Name} {Surname}, I want to be a {DesiredPosition} ({PositionDescription}) with a salary from {typecastedSalary}");
+            $"Hello, I am {Name} {Surname}, I want to be a {DesiredPosition} " +
+            $"({PositionDescription}) with a salary from {typecastedSalary}");
     }
 }
