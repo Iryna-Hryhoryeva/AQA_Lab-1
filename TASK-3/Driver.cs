@@ -1,31 +1,26 @@
 namespace TASK;
 
-public class Driver
+public class Driver : Person
 {
-    public Person Person { get; set; }
-    public DrivingLicense DrivingLicense { get; set; }
-    public Vehicle Vehicle { get; set; }
+    private DrivingLicense _drivingLicense;
+    private Vehicle _vehicle;
 
-    public Driver(Person person, DrivingLicense drivingLicense, Vehicle vehicle)
+    public DrivingLicense DrivingLicense
     {
-        if (DateTime.Today.Year - person.DateOfBirth.Year >= 16)
-        {
-            Person = person;
-        }
-        else
-        {
-            throw new Exception("Age must be 16+");
-        }
+        set => _drivingLicense = value;
+        get => _drivingLicense;
+    }
 
-        if (drivingLicense.DateDrivingLicense > person.DateOfBirth)
-        {
-            DrivingLicense = drivingLicense;
-        }
-        else
-        {
-            throw new Exception("Invalid dates");
-        }
+    public Vehicle Vehicle
+    {
+        get => _vehicle;
+        set => _vehicle = value;
+    }
 
+    public Driver(DrivingLicense drivingLicense, Vehicle vehicle, Person person) : base(person.FirstName,
+        person.LastName, person.DateOfBirth)
+    {
+        DrivingLicense = drivingLicense;
         Vehicle = vehicle;
     }
 }
