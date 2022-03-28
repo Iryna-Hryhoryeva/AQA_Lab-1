@@ -5,6 +5,13 @@ public class Driver : Person
     private DrivingLicense _drivingLicense;
     private Vehicle _vehicle;
 
+    public Driver(DrivingLicense drivingLicense, Vehicle vehicle, Person person) : base(person.FirstName,
+        person.LastName, person.DateOfBirth)
+    {
+        DrivingLicense = drivingLicense;
+        Vehicle = vehicle;
+    }
+    
     public DrivingLicense DrivingLicense
     {
         set => _drivingLicense = value;
@@ -15,12 +22,5 @@ public class Driver : Person
     {
         get => _vehicle;
         set => _vehicle = value;
-    }
-
-    public Driver(DrivingLicense drivingLicense, Vehicle vehicle, Person person) : base(person.FirstName,
-        person.LastName, person.DateOfBirth)
-    {
-        DrivingLicense = drivingLicense;
-        Vehicle = vehicle;
     }
 }
