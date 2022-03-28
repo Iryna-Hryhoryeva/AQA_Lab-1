@@ -4,12 +4,6 @@ namespace TASK;
 
 public class BogusRepository
 {
-    private enum _vehicleModels
-    {
-        BMW,
-        VW
-    };
-
     public IEnumerable<Person> GetPersons(int number)
     {
         var personGenerator = new Faker<Person>()
@@ -27,7 +21,7 @@ public class BogusRepository
     public IEnumerable<Vehicle> GetVehicles(int number)
     {
         var vehicleGenerator = new Faker<Vehicle>()
-            .CustomInstantiator(f => new Vehicle(f.PickRandom<_vehicleModels>().ToString(), f.Random.Int(1950, 2022),
+            .CustomInstantiator(f => new Vehicle(f.PickRandom<VehicleModels>().ToString(), f.Random.Int(1950, 2022),
                 new Engine(f.Random.Int(45, 65), f.Random.Int(120, 300),
                     f.Random.Int(5, 13), f.Vehicle.Fuel(), f.Random.Int(80, 150))));
         return vehicleGenerator.Generate(number);
