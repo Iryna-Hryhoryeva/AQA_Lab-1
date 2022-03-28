@@ -16,12 +16,12 @@ public class CandidateReportGenerator : IReportGenerator
         Console.WriteLine(template,
             "Id:", "Name Surname:", "Desired position:", "Position description:", "Desired salary:");
         
+        var orderedCandidates = from selectedCandidate in _listOfCandidates
+            orderby selectedCandidate.DesiredPosition, selectedCandidate.DesiredSalary
+            select selectedCandidate;
+        
         for (int i = 0; i < _listOfCandidates.Count(); i++)
         {
-            var orderedCandidates = from selectedCandidate in _listOfCandidates
-                                    orderby selectedCandidate.DesiredPosition, selectedCandidate.DesiredSalary
-                                    select selectedCandidate;
-
             var candidate = orderedCandidates.ElementAt(i);
 
             Console.WriteLine(template, candidate.Id,
