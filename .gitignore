@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 
+# IntelliJ’s configs (project specific settings files)
+.idea/
+
 # Build results
 
 [Dd]ebug/
