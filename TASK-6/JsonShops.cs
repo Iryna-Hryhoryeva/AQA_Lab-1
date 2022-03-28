@@ -12,10 +12,6 @@ public class JsonShops
         private Phone _phone;
         private Shop _shop;
 
-        public Guid Id { get => _id; set => _id = value; }
-        public Phone Phone { get => _phone; set => _phone = value; }
-        public Shop Shop { get => _shop; set => _shop = value; }
-
         public Order(Phone phone, Shop shop)
         {
             Id = Guid.NewGuid();
@@ -23,6 +19,10 @@ public class JsonShops
             Shop = shop;
             logger.Info($"Заказ {Phone.Model} на сумму {Phone.Price} успешно оформлен!");
         }
+        
+        public Guid Id { get => _id; set => _id = value; }
+        public Phone Phone { get => _phone; set => _phone = value; }
+        public Shop Shop { get => _shop; set => _shop = value; }
     }
 
     public class Phone
