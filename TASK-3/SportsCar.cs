@@ -1,4 +1,4 @@
-﻿namespace TASK;
+namespace TASK;
 
 public class SportsCar : Vehicle
 {
@@ -19,31 +19,5 @@ public class SportsCar : Vehicle
         return hasEnoughExperience
             ? "The driver's experience meets the requirements."
             : "The driver's experience is not enough for driving a sports car.";
-    }
-}
-
-public class Truck : Vehicle
-{
-    private bool _hasTrailer;
-
-    public Truck(string model, int year, Engine engine, bool hasTrailer) : base(model, year, engine)
-    {
-        Model = model;
-        Year = year;
-        Engine = engine;
-        _hasTrailer = hasTrailer;
-    }
-}
-
-public class Minivan : Vehicle
-{
-    private int _seatsCount;
-
-    public Minivan(string model, int year, Engine engine, int seatsCount) : base(model, year, engine)
-    {
-        Model = model;
-        Year = year;
-        Engine = engine;
-        _seatsCount = seatsCount;
     }
 }
