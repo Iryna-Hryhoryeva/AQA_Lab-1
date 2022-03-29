@@ -19,15 +19,13 @@ public class CandidateReportGenerator : IReportGenerator
         var orderedCandidates = from selectedCandidate in _listOfCandidates
             orderby selectedCandidate.DesiredPosition, selectedCandidate.DesiredSalary
             select selectedCandidate;
-        
-        for (int i = 0; i < _listOfCandidates.Count(); i++)
-        {
-            var candidate = orderedCandidates.ElementAt(i);
 
+        foreach (var candidate in orderedCandidates)
+        {
             Console.WriteLine(template, candidate.Id,
-                candidate.Name + " " + candidate.Surname,
-                candidate.DesiredPosition, candidate.PositionDescription,
-                Math.Round(orderedCandidates.ElementAt(i).DesiredSalary, 2, MidpointRounding.ToEven));
+                            candidate.Name + " " + candidate.Surname,
+                            candidate.DesiredPosition, candidate.PositionDescription,
+                            Math.Round(candidate.DesiredSalary, 2));
         }
     }
 }

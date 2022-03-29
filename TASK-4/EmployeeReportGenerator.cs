@@ -18,13 +18,11 @@ public class EmployeeReportGenerator : IReportGenerator
                                orderby selectedEmployee.CompanyName, selectedEmployee.Salary descending
                                select selectedEmployee;
 
-        for (int i = 0; i < orderedEmployees.Count(); i++)
+        foreach (var employee in orderedEmployees)
         {
-            var employee = orderedEmployees.ElementAt(i);
-
             Console.WriteLine(template, employee.Id,
                 employee.Name + " " + employee.Surname,
-                employee.Position, Math.Round(employee.Salary, 2, MidpointRounding.ToEven),
+                employee.Position, Math.Round(employee.Salary, 2),
                 employee.CompanyName);
         }
     }
