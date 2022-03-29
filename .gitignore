@@ -6,8 +6,10 @@
 *.user
 *.sln.docstates
 
-# Build results
+# IntelliJ's configs (project specific settings files)
+.idea/
 
+# Build results
 [Dd]ebug/
 [Rr]elease/
 x64/
