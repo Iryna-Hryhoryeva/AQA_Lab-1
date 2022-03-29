@@ -8,19 +8,6 @@ public static class CurrencyConverter
     private static double RatioOut { get; set; }
     private static string TargetCurrency { get; set; }
 
-    public static double GetRatio(string name)
-    {
-        if (Enum.TryParse(name, out Currency enumName))
-        {
-            return Data.Ratio[(int) enumName];
-        }
-        else
-        {
-            Console.WriteLine("Неверная валюта.");
-            return 0;
-        }
-    }
-
     public static byte GetInputData()
     {
         double ratio;
@@ -39,7 +26,7 @@ public static class CurrencyConverter
 
             var data = UserInput.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             MoneyAmount = double.Parse(data[0]);
-            ratio = GetRatio(data[1]);
+            ratio = Data.GetRatio(data[1]);
 
         } while (ratio == 0);
 
@@ -47,7 +34,7 @@ public static class CurrencyConverter
         return 1;
     }
 
-    public static void ChooseTargetCurrency()
+    public static void SelectTargetCurrency()
     {
         double ratio;
 
@@ -55,7 +42,7 @@ public static class CurrencyConverter
         {
             Console.WriteLine("Выберите валюту конвертации: USD, EUR, RUB");
             TargetCurrency = Console.ReadLine();
-            ratio = GetRatio(TargetCurrency);
+            ratio = Data.GetRatio(TargetCurrency);
         } while (ratio == 0);
 
         RatioOut = ratio;

@@ -8,7 +8,7 @@ public static class Program
 
         while (CurrencyConverter.GetInputData() == 1)
         {
-            CurrencyConverter.ChooseTargetCurrency();
+            CurrencyConverter.SelectTargetCurrency();
             CurrencyConverter.ShowResult();
         }
     }
