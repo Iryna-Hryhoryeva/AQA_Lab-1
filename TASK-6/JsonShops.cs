@@ -8,7 +8,7 @@ public class JsonShops
 {
     public class Order
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         private Guid _id;
         private Phone _phone;
         private Shop _shop;
@@ -18,7 +18,7 @@ public class JsonShops
             Id = Guid.NewGuid();
             Phone = phone;
             Shop = shop;
-            logger.Info($"Заказ {Phone.Model} на сумму {Phone.Price} успешно оформлен!");
+            _logger.Info($"Заказ {Phone.Model} на сумму {Phone.Price} успешно оформлен!");
         }
         
         public Guid Id { get => _id; set => _id = value; }
@@ -28,7 +28,7 @@ public class JsonShops
 
     public class Phone
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         private string _model;
         private string _operationSystemType;
         private string _marketLaunchDate;
@@ -45,7 +45,7 @@ public class JsonShops
 
         public void Report()
         {
-            logger.Info(
+            _logger.Info(
                 $"Модель: {Model}, тип ОС: {OperationSystemType}, дата выпуска: {MarketLaunchDate}, " +
                 $"стоимость: {Price}, магазин: {Program.Shops.ShopByNumber(ShopId)}\n");
         }
@@ -53,7 +53,7 @@ public class JsonShops
 
     public class Shop
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         private int _id;
         private string _name;
         private string _description;
@@ -74,7 +74,7 @@ public class JsonShops
 
         public void Report()
         {
-            logger.Info(
+            _logger.Info(
                 "\nМагазин №{0} {1} - {2}.\nКоличество устройств IOS в наличии: {3}\nКоличество устройств Android в наличии: {4}\n",
                 Id, Name, Description, CountPhonesWithOsType("IOS"), CountPhonesWithOsType("Android"));
         }
@@ -82,7 +82,7 @@ public class JsonShops
 
     public class AllShops
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         private List<Shop> _shops;
 
         public List<Shop> Shops { get => _shops; set => _shops = value; }
@@ -99,22 +99,24 @@ public class JsonShops
 
             do
             {
-                logger.Info($"В каком магазине вы хотите приобрести {phoneChoice}?");
+                _logger.Info($"В каком магазине вы хотите приобрести {phoneChoice}?");
                 shopChoice = Console.ReadLine();
+                _logger.Info(shopChoice);
+                
                 var foundShop = Shops.Find(s => s.Name == shopChoice);
                 if (foundShop != null)
                 {
                     return foundShop;
                 }
 
-                logger.Info("Такого магазина не существует.");
+                _logger.Info("Такого магазина не существует.");
                 try
                 {
                     throw new StoreNotFoundException(message: "Пожалуйста, введите название магазина заново:");
                 }
                 catch (Exception e)
                 {
-                    logger.Info(e);
+                    _logger.Info(e);
                 }
             } while (true);
         }
@@ -129,8 +131,9 @@ public class JsonShops
             {
                 try
                 {
-                    logger.Info("Какой телефон вы желаете приобрести? ");
+                    _logger.Info("Какой телефон вы желаете приобрести? ");
                     phoneChoice = Console.ReadLine();
+                    _logger.Info(phoneChoice);
 
                     foreach (var shop in Shops)
                     {
@@ -145,14 +148,14 @@ public class JsonShops
 
                     if (Program.FoundPhones.Count == 0)
                     {
-                        logger.Info("Введенный Вами товар не найден");
+                        _logger.Info("Введенный Вами товар не найден");
                     }
 
                     var inStorage = Program.FoundPhones.Find(p => p.IsAvailable);
 
                     if (inStorage == null)
                     {
-                        logger.Info("Данный товар отсутствует на складе.");
+                        _logger.Info("Данный товар отсутствует на складе.");
                         throw new PhoneNotFoundException("Пожалуйста, введите модель телефона заново.");
                     }
                     else
@@ -165,7 +168,7 @@ public class JsonShops
                 }
                 catch (Exception e)
                 {
-                    logger.Info(e.Message);
+                    _logger.Info(e.Message);
                 }
             } while (true);
 
