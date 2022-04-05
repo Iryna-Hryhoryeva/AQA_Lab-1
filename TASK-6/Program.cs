@@ -13,11 +13,12 @@ public static class Program
     public static void Main(string[] args)
     {
         string json;
-        using (var streamReader = new StreamReader("appsettings.json"))
+        var path = "appsettings.json";
+        using (var streamReader = new StreamReader(path))
         {
             json = streamReader.ReadToEnd();
         }
-        
+
         JsonShops = JsonConvert.DeserializeObject<JsonShops>(json);
         Console.WriteLine();
 
@@ -29,10 +30,11 @@ public static class Program
         var chosenPhone = JsonShops.FindPhone();
         var chosenShop = JsonShops.ChooseShop(chosenPhone);
         var selectedPhone = FoundPhones.Find(p => p.Model == chosenPhone && p.ShopId == chosenShop.Id);
-
+        
         var order = new Order(selectedPhone, chosenShop);
         var json2 = JsonConvert.SerializeObject(order);
-        using (StreamWriter file = File.CreateText(@"D:\order.txt"))
+        path = "order.txt";
+        using (StreamWriter file = File.CreateText(path))
         {
             file.Write(json2);
             file.Close();
