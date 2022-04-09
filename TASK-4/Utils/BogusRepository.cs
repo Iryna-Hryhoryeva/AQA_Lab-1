@@ -1,12 +1,13 @@
 using Bogus;
+using TASK_4.Persons;
 
-namespace Persons;
+namespace TASK_4.Utils;
 
-public class PersonsRepository
+public class BogusRepository
 {
     private int _startNumber = 500;
     private int _endNumber = 10000;
-    
+
     public IEnumerable<Candidate> GetCandidates(List<Candidate> listOfObjects)
     {
         var candidateGenerator = new Faker<Candidate>()
@@ -16,6 +17,7 @@ public class PersonsRepository
             .RuleFor(c => c.DesiredPosition, f => f.Name.JobTitle())
             .RuleFor(c => c.PositionDescription, (f, c) => f.Name.JobDescriptor())
             .RuleFor(c => c.DesiredSalary, f => f.Random.Double(_startNumber, _endNumber));
+
         return candidateGenerator.Generate(listOfObjects.Count);
     }
 
@@ -32,6 +34,7 @@ public class PersonsRepository
             .RuleFor(e => e.CompanyAddress, f => f.Address.FullAddress())
             .RuleFor(e => e.CompanyCity, f => f.Address.City())
             .RuleFor(e => e.CompanyCountry, f => f.Address.Country());
+
         return employeeGenerator.Generate(listOfObjects.Count);
     }
 }

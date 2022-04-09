@@ -1,4 +1,4 @@
-namespace Persons;
+namespace TASK_4.Utils;
 
 public static class RandomUtils
 {

@@ -1,4 +1,7 @@
-namespace Persons;
+using TASK_4.Interfaces;
+using TASK_4.Persons;
+
+namespace TASK_4.Reporters;
 
 public class EmployeeReportGenerator : IReportGenerator
 {

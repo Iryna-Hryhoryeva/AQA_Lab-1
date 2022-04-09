@@ -1,4 +1,8 @@
-namespace Persons;
+using TASK_4.Persons;
+using TASK_4.Reporters;
+using TASK_4.Utils;
+
+namespace TASK_4;
 
 public class UserFactory
 {
@@ -9,7 +13,7 @@ public class UserFactory
         {
             case UserTypes.Employee:
                 var newEmployees = newUsers.Cast<Employee>().ToList();
-                
+
                 var newEmployeesReport = new EmployeeReportGenerator(newEmployees);
                 Console.WriteLine("List of new employees:");
                 newEmployeesReport.Report();
@@ -17,12 +21,12 @@ public class UserFactory
 
             case UserTypes.Candidate:
                 var newCandidates = newUsers.Cast<Candidate>().ToList();
-               
+
                 var newCandidatesReport = new CandidateReportGenerator(newCandidates);
                 Console.WriteLine("List of new candidates:");
                 newCandidatesReport.Report();
                 break;
-            
+
             default:
                 throw new ArgumentOutOfRangeException(nameof(userType), userType, "Неизвестный тип пользователя.");
         }
@@ -33,8 +37,8 @@ public class UserFactory
         Console.Write("Please, enter the required number of new users: ");
         var numberOfUsers = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine();
-        
-        var repository = new PersonsRepository();
+
+        var repository = new BogusRepository();
         switch (userType)
         {
             case UserTypes.Employee:
@@ -47,6 +51,7 @@ public class UserFactory
                 var iEnumerableEmployees = repository.GetEmployees(listOfEmployees);
                 listOfEmployees = iEnumerableEmployees.ToList();
                 var usersEmployees = new List<User>(listOfEmployees);
+
                 return usersEmployees;
 
             case UserTypes.Candidate:
@@ -59,6 +64,7 @@ public class UserFactory
                 var iEnumerableCandidates = repository.GetCandidates(listOfCandidates);
                 listOfCandidates = iEnumerableCandidates.ToList();
                 var usersCandidates = new List<User>(listOfCandidates);
+
                 return usersCandidates;
 
             default:

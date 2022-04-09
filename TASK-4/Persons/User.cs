@@ -1,4 +1,4 @@
-namespace Persons;
+namespace TASK_4.Persons;
 
 public class User
 {
@@ -11,11 +11,13 @@ public class User
         get { return _id; }
         set { _id = value; }
     }
+    
     public string Name
     {
         get { return _name; }
         set { _name = value; }
     }
+    
     public string Surname
     {
         get { return _surname; }

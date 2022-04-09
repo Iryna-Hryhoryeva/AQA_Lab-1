@@ -1,4 +1,6 @@
-namespace Persons;
+using TASK_4.Interfaces;
+
+namespace TASK_4.Persons;
 
 public class Candidate : User, IUserInfo
 {
