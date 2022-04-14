@@ -4,7 +4,9 @@ namespace Task5.Utils;
 
 public class BogusRepository
 {
-    public IEnumerable<Ware> GetWares(List<Ware> listOfWares)
+    public static string BogusPassportId = new Faker().Finance.Account();
+    
+    public List<Ware> GetWares(List<Ware> listOfWares)
     {
         var wareGenerator = new Faker<Ware>()
             .RuleFor(w => w.Id, (f, w) => f.Commerce.Ean8())
@@ -15,12 +17,12 @@ public class BogusRepository
         return wareGenerator.Generate(listOfWares.Count);
     }
 
-    public IEnumerable<Customer> GetCustomers(List<Customer> listOfCustomers)
+    public List<Customer> GetCustomers(List<Customer> listOfCustomers)
     {
         var customerGenerator = new Faker<Customer>()
-            .RuleFor(c => c.PassportId, (f, c) => f.Finance.Account()) 
+            .RuleFor(c => c.PassportId, (f, c) => BogusPassportId) 
             .RuleFor(c => c.Name, (f, c) => f.Name.FullName())
-            .RuleFor(c => c.Age, (f, c) => f.Person.Random.Int(6, 110))
+            .RuleFor(c => c.Age, (f, c) => f.Person.Random.Int(Customer.MinimumAge, Customer.MaximumAge))
             .RuleFor(c => c.Cart, () => new Cart());
         
         return customerGenerator.Generate(listOfCustomers.Count);

@@ -2,17 +2,18 @@ namespace Task5;
 
 public class Customer
 {
-    private string _passportId;
-    private string _name;
-    private int _age;
-    private Cart _cart;
+    public const int MinimumAge = 4;
+    public const int MaximumAge = 130;
+    public string PassportId { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public Cart Cart { get; set; }
 
-    public string PassportId { get => _passportId; set => _passportId = value; }
-    public string Name { get => _name; set => _name = value; } 
-    public int Age { get => _age; set => _age = value; }
-    public Cart Cart { get => _cart; set => _cart = value; }
+    public Customer()
+    {
+    }
 
-    public void SetCustomer(string passportId, string name, int age, Cart cart)
+    public Customer(string passportId, string name, int age, Cart cart)
     {
         PassportId = passportId;
         Name = name;
@@ -20,9 +21,10 @@ public class Customer
         Cart = cart;
     }
 
-    public bool Equals(Customer customer)
+
+    public override bool Equals(object? passportId)
     {
-        return PassportId == customer.PassportId;
+        return PassportId == (string)passportId;
     }
 
     public void AddWare(Ware ware)

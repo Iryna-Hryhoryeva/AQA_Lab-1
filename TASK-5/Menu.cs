@@ -1,14 +1,18 @@
+using Task5.Utils;
+
 namespace Task5;
 
 public class Menu
 {
     private static int _menuChoice;
     private static int _selectedNumberOfCustomer;
+
     private static string _header = string.Format("№№ | {0,20} | {1,30} | {2,10} | {3} ", "Категория", "Наименование",
         "Стоимость", "Идентификационный номер");
+
     private static string _line = "\n" + new string('-', _header.Length);
 
-    public static void Implementor(IEnumerable<Ware> wares, IEnumerable<Customer> users)
+    public static void Implementor(List<Ware> wares, List<Customer> users)
     {
         do
         {
@@ -21,7 +25,7 @@ public class Menu
                     break;
 
                 case 2:
-                    Console.WriteLine("Выберите номер покупателя (1-" + Program.NumberOfCustomers + "): ");
+                    Console.WriteLine("Выберите номер покупателя (1-" + ShopLogic.NumberOfCustomers + "): ");
                     ShowListOfAllCustomers(users);
                     Console.Write("Ваш выбор: ");
                     _selectedNumberOfCustomer = Convert.ToInt16(Console.ReadLine());
@@ -79,21 +83,45 @@ public class Menu
         } while (_menuChoice != 0);
     }
 
-    private static IEnumerable<Customer> AddNewCustomerToList(IEnumerable<Customer> users)
+    private static List<Customer> AddNewCustomerToList(List<Customer> users)
     {
         Console.Write("Введите номер паспорта: ");
         var passportNumberOfCustomer = Console.ReadLine();
+        while (passportNumberOfCustomer.Length != BogusRepository.BogusPassportId.Length)
+        {
+            Console.Write($"Номер паспорта должен составлять {BogusRepository.BogusPassportId.Length} цифр. " +
+                          $"Пожалуйста, введите корректный номер паспорта: ");
+            passportNumberOfCustomer = Console.ReadLine();
+        }
 
         Console.Write("Введите имя покупателя: ");
         var nameOfCustomer = Console.ReadLine();
 
-        Console.Write("Введите возраст покупателя: ");
-        var ageOfCustomer = Convert.ToInt16(Console.ReadLine());
+        const string okMessage = "Введите возраст покупателя: ";
+        const string errorMessage = "Вы ввели некорректный возраст. Попробуйте еще раз: ";
+        var ageOfCustomer = 0;
+        var ageIsOkay = true;
+        do
+        {
+            try
+            {
+                Console.Write(ageIsOkay ? okMessage : errorMessage);
+                ageOfCustomer = Convert.ToInt16(Console.ReadLine());
+                ageIsOkay = ageOfCustomer >= Customer.MinimumAge && ageOfCustomer <= Customer.MaximumAge;
+                if (!ageIsOkay)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception e)
+            {
+                ageIsOkay = false;
+            }
+        } while (!ageIsOkay);
 
-        var newCustomer = new Customer();
-        newCustomer.SetCustomer(passportNumberOfCustomer, nameOfCustomer, ageOfCustomer, new Cart());
+        var newCustomer = new Customer(passportNumberOfCustomer, nameOfCustomer, ageOfCustomer, new Cart());
 
-        var found = users.Where(u => u.Equals(newCustomer)).Count() > 0;
+        var found = users.Where(u => u.Equals(newCustomer.PassportId)).Count() > 0;
         if (found)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -102,14 +130,14 @@ public class Menu
         }
         else
         {
-            users.Append(newCustomer);
+            users.Add(newCustomer);
             Console.WriteLine("Добавлен новый пользователь.\n");
         }
 
         return users;
     }
 
-    private static void ShowListOfAllCustomers(IEnumerable<Customer> users)
+    private static void ShowListOfAllCustomers(List<Customer> users)
     {
         Console.WriteLine($"№№ ▐ {"Имя",20} ▐ {"Возраст",7} ▐ {"Номер паспорта"}");
         for (var i = 0; i < users.Count(); i++)
@@ -140,7 +168,7 @@ public class Menu
         Console.WriteLine();
     }
 
-    private static List<Ware> ShowWaresOfADefiniteCustomer(int selectedNumberOfCustomer, IEnumerable<Customer> users)
+    private static List<Ware> ShowWaresOfADefiniteCustomer(int selectedNumberOfCustomer, List<Customer> users)
     {
         var customerWares = users.ElementAt(selectedNumberOfCustomer - 1).Cart.Wares;
 
@@ -155,7 +183,7 @@ public class Menu
         return customerWares;
     }
 
-    private static void AddWare(IEnumerable<Ware> wares, IEnumerable<Customer> users, int _selectedNumberOfCustomer)
+    private static void AddWare(List<Ware> wares, List<Customer> users, int _selectedNumberOfCustomer)
     {
         for (var i = 0; i < wares.Count(); i++)
         {
@@ -181,7 +209,7 @@ public class Menu
         }
     }
 
-    private static void RemoveWare(IEnumerable<Customer> users, int _selectedNumberOfCustomer)
+    private static void RemoveWare(List<Customer> users, int _selectedNumberOfCustomer)
     {
         Console.WriteLine("Введите номер товара в корзине: ");
         for (var i = 0; i < users.ElementAt(_selectedNumberOfCustomer - 1).Cart.Wares.Count(); i++)
