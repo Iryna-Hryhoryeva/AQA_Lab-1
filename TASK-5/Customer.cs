@@ -21,10 +21,14 @@ public class Customer
         Cart = cart;
     }
 
-
-    public override bool Equals(object? passportId)
+    public override bool Equals(object obj)
     {
-        return PassportId == (string)passportId;
+        return PassportId == ((Customer)obj).PassportId;
+    }
+
+    public override int GetHashCode()
+    {
+        return PassportId.GetHashCode();
     }
 
     public void AddWare(Ware ware)

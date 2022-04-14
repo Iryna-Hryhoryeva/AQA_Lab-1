@@ -1,6 +1,4 @@
-﻿using Task5.Utils;
-
-namespace Task5;
+﻿namespace Task5;
 
 public class Program
 {

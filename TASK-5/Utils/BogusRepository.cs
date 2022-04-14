@@ -4,8 +4,6 @@ namespace Task5.Utils;
 
 public class BogusRepository
 {
-    public static string BogusPassportId = new Faker().Finance.Account();
-    
     public List<Ware> GetWares(List<Ware> listOfWares)
     {
         var wareGenerator = new Faker<Ware>()
@@ -20,7 +18,7 @@ public class BogusRepository
     public List<Customer> GetCustomers(List<Customer> listOfCustomers)
     {
         var customerGenerator = new Faker<Customer>()
-            .RuleFor(c => c.PassportId, (f, c) => BogusPassportId) 
+            .RuleFor(c => c.PassportId, (f, c) => f.Finance.Account()) 
             .RuleFor(c => c.Name, (f, c) => f.Name.FullName())
             .RuleFor(c => c.Age, (f, c) => f.Person.Random.Int(Customer.MinimumAge, Customer.MaximumAge))
             .RuleFor(c => c.Cart, () => new Cart());

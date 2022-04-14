@@ -1,4 +1,4 @@
-using Task5.Utils;
+using Bogus;
 
 namespace Task5;
 
@@ -6,10 +6,8 @@ public class Menu
 {
     private static int _menuChoice;
     private static int _selectedNumberOfCustomer;
-
     private static string _header = string.Format("№№ | {0,20} | {1,30} | {2,10} | {3} ", "Категория", "Наименование",
         "Стоимость", "Идентификационный номер");
-
     private static string _line = "\n" + new string('-', _header.Length);
 
     public static void Implementor(List<Ware> wares, List<Customer> users)
@@ -87,9 +85,9 @@ public class Menu
     {
         Console.Write("Введите номер паспорта: ");
         var passportNumberOfCustomer = Console.ReadLine();
-        while (passportNumberOfCustomer.Length != BogusRepository.BogusPassportId.Length)
+        while (passportNumberOfCustomer.Length != new Faker().Finance.Account().Length)
         {
-            Console.Write($"Номер паспорта должен составлять {BogusRepository.BogusPassportId.Length} цифр. " +
+            Console.Write($"Номер паспорта должен составлять {new Faker().Finance.Account().Length} цифр. " +
                           $"Пожалуйста, введите корректный номер паспорта: ");
             passportNumberOfCustomer = Console.ReadLine();
         }
@@ -121,7 +119,7 @@ public class Menu
 
         var newCustomer = new Customer(passportNumberOfCustomer, nameOfCustomer, ageOfCustomer, new Cart());
 
-        var found = users.Where(u => u.Equals(newCustomer.PassportId)).Count() > 0;
+        var found = users.Where(u => u.Equals(newCustomer)).Count() > 0;
         if (found)
         {
             Console.ForegroundColor = ConsoleColor.Red;
