@@ -4,16 +4,11 @@ namespace TASK_6;
 
 public class Shop
 {
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public List<Phone> Phones { get; set; }
     private static Logger _logger = LogManager.GetCurrentClassLogger();
-    private int _id;
-    private string _name;
-    private string _description;
-    private List<Phone> _phones;
-
-    public int Id { get => _id; set => _id = value; }
-    public string Name { get => _name; set => _name = value; }
-    public string Description { get => _description; set => _description = value; }
-    public List<Phone> Phones { get => _phones; set => _phones = value; }
 
     public int CountPhonesWithOsType(string osType)
     {
