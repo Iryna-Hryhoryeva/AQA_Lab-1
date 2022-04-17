@@ -5,7 +5,7 @@ namespace Task5;
 public class ShopLogic
 {
     public const int NumberOfCustomers = 5;
-    private static BogusRepository _repository = new BogusRepository();
+    private static BogusRepository _repository = new();
 
     public static List<Ware> CreateWares()
     {
@@ -15,16 +15,12 @@ public class ShopLogic
             listOfWares.Add(new Ware());
         }
 
-        var wares = _repository.GetWares(listOfWares);
-
-        return wares;
+        return _repository.GetWares(listOfWares);
     }
 
     public static List<Cart> CreateEmptyCarts()
     {
-        var carts = new List<Cart>();
-
-        return carts;
+        return new List<Cart>();
     }
 
     public static List<Cart> PutWaresInCarts(List<Cart> carts, List<Ware> wares)
@@ -32,7 +28,7 @@ public class ShopLogic
         for (var i = 0; i < NumberOfCustomers; i++)
         {
             carts.Add(new Cart());
-            for (var j = 0; j < RandomUtils.RandomNumberOfCarts; j++)
+            for (var j = 0; j < RandomUtils.GetRandomNumber(); j++)
             {
                 carts[i].Wares.Add(wares.ElementAt(RandomUtils.GetRandomWareIndex(wares)));
             }
@@ -49,9 +45,7 @@ public class ShopLogic
             listOfCustomers.Add(new Customer());
         }
 
-        var users = _repository.GetCustomers(listOfCustomers);
-
-        return users;
+        return _repository.GetCustomers(listOfCustomers);
     }
 
     public static List<Customer> GiveCartsToCustomers(List<Cart> carts, List<Customer> users)

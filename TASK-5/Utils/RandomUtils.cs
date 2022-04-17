@@ -2,11 +2,11 @@ namespace Task5.Utils;
 
 public class RandomUtils
 {
-    private static Random _randomNumber = new Random();
+    private static Random _randomNumber = new();
 
-    public static int RandomNumberOfCarts
+    public static int GetRandomNumber()
     {
-        get => _randomNumber.Next(2, 20);
+        return _randomNumber.Next(2, 20);
     }
 
     public static int GetRandomWareIndex(IEnumerable<Ware> wares)

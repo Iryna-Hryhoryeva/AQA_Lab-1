@@ -21,18 +21,18 @@ public class Customer
         Cart = cart;
     }
 
+    public void AddWare(Ware ware)
+    {
+        Cart.Wares.Add(ware);
+    }
+
     public override bool Equals(object obj)
     {
-        return PassportId == ((Customer)obj).PassportId;
+        return PassportId == ((Customer) obj).PassportId;
     }
 
     public override int GetHashCode()
     {
         return PassportId.GetHashCode();
-    }
-
-    public void AddWare(Ware ware)
-    {
-        Cart.Wares.Add(ware);
     }
 }
