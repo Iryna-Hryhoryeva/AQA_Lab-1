@@ -1,4 +1,4 @@
-namespace NUnit_TestProject;
+namespace NUnit_TestProject.ClassesUnderTest;
 
 public class Calculator
 {

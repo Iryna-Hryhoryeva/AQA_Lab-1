@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using NUnit_TestProject.ClassesUnderTest;
+using NUnit_TestProject.Utils;
 
-namespace NUnit_TestProject;
+namespace NUnit_TestProject.Tests;
 
 [TestFixture]
 public class Tests
@@ -40,8 +42,8 @@ public class Tests
     [Property("Severity", "A")]
     public void TestForNoFractionalPart()
     {
-        var a = TestContext.CurrentContext.Random.Next(0, 100);
-        var b = TestContext.CurrentContext.Random.Next(101, 200);
+        var a = Randomizer.GetLesserRandomIntValue();
+        var b = Randomizer.GetGreaterRandomIntValue();
         var result = _calculator.Div(a, b);
         if (a < b)
         {
@@ -66,9 +68,8 @@ public class Tests
     {
         Assert.Multiple(() =>
         {
-            var a = TestContext.CurrentContext.Random.NextDouble(100);
-            var b = TestContext.CurrentContext.Random.NextDouble(10, 20);
-
+            var a = Randomizer.GetGreaterRandomDoubleValue();
+            var b = Randomizer.GetLesserRandomDoubleValue();
             TestContext.Out.WriteLineAsync("First Double is " + a);
             TestContext.Out.WriteLineAsync($"Second Double is {b}");
             Assert.AreEqual(a / b, _calculator.Div(a, b));
@@ -77,11 +78,10 @@ public class Tests
             Assert.IsTrue(Double.IsNegativeInfinity(_calculator.Div(-10d, 0d)));
             Assert.IsFalse(Double.IsInfinity(_calculator.Div(0d, 0d)));
             Assert.IsNaN(_calculator.Div(Math.Sqrt(-4), 2));
-                
         });
     }
     
-    [TearDown]
+    [OneTimeTearDown]
     public void EndTesting()
     {
         Console.Out.WriteLine("The testing is over!");
