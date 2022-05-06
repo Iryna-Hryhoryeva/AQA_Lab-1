@@ -8,11 +8,12 @@ namespace TASK_6.Services;
 
 public class ShopLogic
 {
+    private static readonly string _pathForReceipt = $"Data{Path.DirectorySeparatorChar}receipt.txt";
     private static List<Phone> _foundPhones;
 
-    public static void ShowShopInfo(ListOfShopsFromJson listOfShopsFromJson)
+    public static void ShowShopInfo(ListOfShops listOfShops)
     {
-        foreach (var shop in listOfShopsFromJson.Shops)
+        foreach (var shop in listOfShops.Shops)
         {
             ReportShops(shop);
         }
@@ -36,35 +37,35 @@ public class ShopLogic
         return foundPhones.Count();
     }
 
-    private static void ReportFoundPhones(List<Phone> foundPhones, ListOfShopsFromJson listOfShopsFromJson)
+    private static void ReportFoundPhones(List<Phone> foundPhones, ListOfShops listOfShops)
     {
         foreach (var foundPhone in foundPhones)
         {
             Log.Info(
                 $"Модель: {foundPhone.Model}, тип ОС: {foundPhone.OperationSystemType}, " +
                 $"дата выпуска: {foundPhone.MarketLaunchDate}, " +
-                $"стоимость: {foundPhone.Price}, магазин: {ShowShopNameByNumber(foundPhone.ShopId, listOfShopsFromJson)}");
+                $"стоимость: {foundPhone.Price}, магазин: {ShowShopNameByNumber(foundPhone.ShopId, listOfShops)}");
         }
     }
 
-    private static string ShowShopNameByNumber(int shopId, ListOfShopsFromJson listOfShopsFromJson)
+    private static string ShowShopNameByNumber(int shopId, ListOfShops listOfShops)
     {
-        var shop = listOfShopsFromJson.Shops.Find(shop => shop.Id == shopId);
+        var shop = listOfShops.Shops.Find(shop => shop.Id == shopId);
 
         return shop.Name;
     }
 
-    public static Tuple<Phone, Shop> SelectPhone(ListOfShopsFromJson listOfShopsFromJson)
+    public static Tuple<Phone, Shop> SelectPhone(ListOfShops listOfShops)
     {
-        var selectedPhoneModelAvailableInAllShops = FindPhoneModelCustomerRequests(listOfShopsFromJson);
-        var selectedShop = SelectShop(selectedPhoneModelAvailableInAllShops, listOfShopsFromJson);
+        var selectedPhoneModelAvailableInAllShops = FindPhoneModelCustomerRequests(listOfShops);
+        var selectedShop = SelectShop(selectedPhoneModelAvailableInAllShops, listOfShops);
         var selectedPhone = _foundPhones.Find(p =>
             p.Model == selectedPhoneModelAvailableInAllShops && p.ShopId == selectedShop.Id);
 
         return Tuple.Create(selectedPhone, selectedShop);
     }
 
-    private static string FindPhoneModelCustomerRequests(ListOfShopsFromJson listOfShopsFromJson)
+    private static string FindPhoneModelCustomerRequests(ListOfShops listOfShops)
     {
         string selectedPhoneModel;
         var foundPhones = new List<Phone>();
@@ -76,7 +77,7 @@ public class ShopLogic
                 Log.Info("Какой телефон вы желаете приобрести? ");
                 selectedPhoneModel = Console.ReadLine();
                 Log.Debug(selectedPhoneModel);
-                foreach (var shop in listOfShopsFromJson.Shops)
+                foreach (var shop in listOfShops.Shops)
                 {
                     foundPhoneOfSelectedModel = shop.Phones.Find(phone => phone.Model == selectedPhoneModel);
                     if (foundPhoneOfSelectedModel != null)
@@ -101,7 +102,7 @@ public class ShopLogic
                 else
                 {
                     var successfulPhoneRequest = _foundPhones.FindAll(phone => phone.IsAvailable);
-                    ReportFoundPhones(successfulPhoneRequest, listOfShopsFromJson);
+                    ReportFoundPhones(successfulPhoneRequest, listOfShops);
 
                     break;
                 }
@@ -115,7 +116,7 @@ public class ShopLogic
         return selectedPhoneModel;
     }
 
-    private static Shop SelectShop(string selectedPhoneModelCanBeAvailableInAllShops, ListOfShopsFromJson listOfShopsFromJson)
+    private static Shop SelectShop(string selectedPhoneModelCanBeAvailableInAllShops, ListOfShops listOfShops)
     {
         string selectedShopName;
         do
@@ -124,7 +125,7 @@ public class ShopLogic
             selectedShopName = Console.ReadLine();
             Log.Debug(selectedShopName);
 
-            var foundShop = listOfShopsFromJson.Shops.Find(
+            var foundShop = listOfShops.Shops.Find(
                 shop => shop.Name == selectedShopName && 
                         shop.Phones.Find(phone => phone.Model == selectedPhoneModelCanBeAvailableInAllShops) != null);
             if (foundShop != null)
@@ -152,9 +153,8 @@ public class ShopLogic
     {
         var receipt = new Receipt(selectedPhone, selectedShop.Name, selectedShop.Description);
         var json = JsonConvert.SerializeObject(receipt);
-        var pathForReceipt = $"Data{Path.DirectorySeparatorChar}receipt.txt";
         
-        using (var file = File.CreateText(pathForReceipt))
+        using (var file = File.CreateText(_pathForReceipt))
         {
             file.Write(json);
             file.Close();

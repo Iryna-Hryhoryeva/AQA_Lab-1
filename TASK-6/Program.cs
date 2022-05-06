@@ -1,5 +1,4 @@
-﻿using TASK_6.Models;
-using TASK_6.Services;
+﻿using TASK_6.Services;
 
 namespace TASK_6;
 
@@ -7,8 +6,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var listOfShopsFromJson = new ListOfShopsFromJson();
-        JsonDeserializer.GetDataFromJson(ref listOfShopsFromJson);
+        var listOfShopsFromJson = JsonDeserializer.GetShops();
         ShopLogic.ShowShopInfo(listOfShopsFromJson);
         var dataForReceipt = ShopLogic.SelectPhone(listOfShopsFromJson);
         ShopLogic.ConfirmOrderSuccessfullyPlaced(dataForReceipt.Item1);

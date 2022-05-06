@@ -1,6 +1,6 @@
 namespace TASK_6.Models;
 
-public class ListOfShopsFromJson
+public class ListOfShops
 {
     public List<Shop> Shops { get; set; }
 }

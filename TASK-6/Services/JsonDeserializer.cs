@@ -6,16 +6,18 @@ namespace TASK_6.Services;
 
 public class JsonDeserializer
 {
-    public static void GetDataFromJson(ref ListOfShopsFromJson listOfShopsFromJson)
+    private static readonly string _pathForData = $"Data{Path.DirectorySeparatorChar}appsettings.json";
+    private static ListOfShops _listOfShops = new ();
+    
+    public static ListOfShops GetShops()
     {
         try
         {
-            var pathForData = $"Data{Path.DirectorySeparatorChar}appsettings.json";
-            using (var streamReader = new StreamReader(pathForData))
+            using (var streamReader = new StreamReader(_pathForData))
             {
                 var json = streamReader.ReadToEnd();
-                listOfShopsFromJson = JsonConvert.DeserializeObject<ListOfShopsFromJson>(json);
-                if (listOfShopsFromJson == null)
+                _listOfShops = JsonConvert.DeserializeObject<ListOfShops>(json);
+                if (_listOfShops == null)
                 {
                     throw new Exception();
                 }
@@ -25,5 +27,7 @@ public class JsonDeserializer
         {
             Log.Warn($"Возникла ошибка {exception.GetType()}: {exception.Message}");
         }
+
+        return _listOfShops;
     }
 }
