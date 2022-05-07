@@ -21,8 +21,6 @@ public class TestsOfWebpageForLocatorsHometask
         var fullPathToFile =
             $"{basePath}{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}webpage_for_locators_hometask.html";
         _driver.Navigate().GoToUrl(fullPathToFile);
-        var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
-        wait.Until(driver => driver.FindElement(By.TagName("h1")).Displayed);
     }
 
     [Test]
