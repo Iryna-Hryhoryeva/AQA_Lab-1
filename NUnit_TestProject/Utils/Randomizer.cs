@@ -6,8 +6,8 @@ public class Randomizer
 {
     private static (int, int) _lesserInt = (0, 100);
     private static (int, int) _greaterInt = (101, 200);
-    private static (double, double) _lesserDouble = (10, 20);
-    private static double _greaterDouble = 100;
+    private const double _lesserDouble = 20;
+    private static (double, double) _greaterDouble = (21, 100);
 
     public static int GetLesserRandomIntValue()
     {
@@ -21,11 +21,11 @@ public class Randomizer
 
     public static double GetLesserRandomDoubleValue()
     {
-        return TestContext.CurrentContext.Random.NextDouble(_lesserDouble.Item1, _lesserDouble.Item2);
+        return TestContext.CurrentContext.Random.NextDouble(_lesserDouble);
     }
 
     public static double GetGreaterRandomDoubleValue()
     {
-        return TestContext.CurrentContext.Random.NextDouble(_greaterDouble);
+        return TestContext.CurrentContext.Random.NextDouble(_greaterDouble.Item1, _greaterDouble.Item2);
     }
 }
