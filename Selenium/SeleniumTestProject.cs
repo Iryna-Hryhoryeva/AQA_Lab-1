@@ -60,65 +60,53 @@ public class Tests
     {
         _driver.Navigate().GoToUrl("https://masterskayapola.ru/kalkulyator/laminata.html");
 
-        var inputFormsBy = By.CssSelector(".form-control.checknumber");
-        var inputForms = _driver.FindElements(inputFormsBy);
-
-        var roomLength = inputForms[0];
+        var roomLength = _driver.FindElement(By.Name("calc_roomwidth"));
         roomLength.SendKeys("5");
-
-        var roomWidth = inputForms[1];
+        
+        var roomWidth = _driver.FindElement(By.Name("calc_roomheight"));
         roomWidth.SendKeys("5");
-
-        var laminateLength = inputForms[2];
+        
+        var laminateLength = _driver.FindElement(By.Name("calc_lamwidth"));
         laminateLength.SendKeys("5");
 
-        var laminateWidth = inputForms[3];
+        var laminateWidth = _driver.FindElement(By.Name("calc_lamheight"));
         laminateWidth.SendKeys("5");
 
-        var laminatePerPack = inputForms[4];
+        var laminatePerPack = _driver.FindElement(By.Name("calc_inpack"));
         laminatePerPack.SendKeys("5");
 
-        var laminatePrice = inputForms[5];
+        var laminatePrice = _driver.FindElement(By.Name("calc_price"));
         laminatePrice.SendKeys("5");
 
-        var rowOffsetBy = By.CssSelector(".form-control.change_bias");
-        var rowOffsetElement = _driver.FindElement(rowOffsetBy);
+        var rowOffsetElement = _driver.FindElement(By.Name("calc_bias"));
         rowOffsetElement.SendKeys("5");
 
-        var wallIdent = inputForms[6];
+        var wallIdent = _driver.FindElement(By.Name("calc_walldist"));
         wallIdent.SendKeys("5");
 
-        var calculateButtonBy = By.CssSelector(".btn.btn-secondary");
-        var calculateButtonElement = _driver.FindElement(calculateButtonBy);
+        var calculateButtonElement = _driver.FindElement(By.CssSelector(".btn.btn-secondary"));
         calculateButtonElement.Click();
 
-        var directionOfLayBy = By.XPath("//select[@name='calc_direct']");
-        var directionOfLayElement = _driver.FindElement(directionOfLayBy);
+        var directionOfLayElement = _driver.FindElement(By.XPath("//select[@name='calc_direct']"));
         var listOfDirectionsOfLay = new SelectElement(directionOfLayElement);
         Assert.That(listOfDirectionsOfLay.SelectedOption.Text == "По длине комнаты");
-
-        var floorInstallationAreaBy = By.CssSelector("#s_lam > b:nth-child(1)");
-        var floorInstallationAreaElement = _driver.FindElement(floorInstallationAreaBy);
+        
+        var floorInstallationAreaElement = _driver.FindElement(By.CssSelector("#s_lam > b:nth-child(1)"));
         Assert.AreEqual("145.04", floorInstallationAreaElement.Text, "The area value is incorrect.");
 
-        var numberOfPanelsBy = By.CssSelector("#l_count > b:nth-child(1)");
-        var numberOfPanelsElement = _driver.FindElement(numberOfPanelsBy);
+        var numberOfPanelsElement = _driver.FindElement(By.CssSelector("#l_count > b:nth-child(1)"));
         Assert.AreEqual("31", numberOfPanelsElement.Text, "The number of panels is incorrect.");
 
-        var numberOfPackagesBy = By.CssSelector("#l_packs > b:nth-child(1)");
-        var numberOfPackagesElement = _driver.FindElement(numberOfPackagesBy);
+        var numberOfPackagesElement = _driver.FindElement(By.CssSelector("#l_packs > b:nth-child(1)"));
         Assert.AreEqual("1", numberOfPackagesElement.Text, "The number of packages is incorrect.");
 
-        var priceBy = By.CssSelector("#l_price > b:nth-child(1)");
-        var priceElement = _driver.FindElement(priceBy);
+        var priceElement = _driver.FindElement(By.CssSelector("#l_price > b:nth-child(1)"));
         Assert.AreEqual("2750000", priceElement.Text, "The price is incorrect.");
 
-        var leftoversBy = By.CssSelector("#l_over > b:nth-child(1)");
-        var leftoversElement = _driver.FindElement(leftoversBy);
+        var leftoversElement = _driver.FindElement(By.CssSelector("#l_over > b:nth-child(1)"));
         Assert.AreEqual("69", leftoversElement.Text, "The number of leftovers is incorrect.");
 
-        var cutOffsBy = By.CssSelector("#l_trash > b:nth-child(1)");
-        var cutOffsElement = _driver.FindElement(cutOffsBy);
+        var cutOffsElement = _driver.FindElement(By.CssSelector("#l_trash > b:nth-child(1)"));
         Assert.AreEqual("7", cutOffsElement.Text, "The number of cut-offs is incorrect.");
     }
 
