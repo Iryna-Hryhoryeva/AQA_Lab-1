@@ -23,94 +23,47 @@ public class TestsOfWebpageForLocatorsHometask
     }
 
     [Test]
-    public void Should_PrintSecondElementHavingTextTest()
+    public void XPath_Test()
     {
-        var elementsHavingTextTestBy = By.XPath("//*[contains(text(), 'Test')]");
-        var elementsHavingTextTest = _driver.FindElements(elementsHavingTextTestBy);
+        var elementsHavingTextTest = _driver.FindElements(By.XPath("//*[contains(text(), 'Test')]"));
         Assert.IsNotNull(elementsHavingTextTest);
         Console.WriteLine("secondElementHavingTextTest: " + elementsHavingTextTest[1]);
-    }
 
-    [Test]
-    public void Should_PrintElementWithTextEqualsTestAndAttributeEqualsIds()
-    {
-        var elementWithTextEqualsTestAndAttributeEqualsIdsBy = By.XPath("//*[@ids][text()='Test']");
-        var elementWithTextEqualsTestAndAttributeEqualsIds =
-            _driver.FindElement(elementWithTextEqualsTestAndAttributeEqualsIdsBy);
+        var elementWithTextEqualsTestAndAttributeEqualsIds = _driver.FindElement(By.XPath("//*[@ids][text()='Test']"));
         Assert.IsNotNull(elementWithTextEqualsTestAndAttributeEqualsIds);
         Console.WriteLine("elementWithTextEqualsTestAndAttributeEqualsIds: " +
                           elementWithTextEqualsTestAndAttributeEqualsIds);
-    }
 
-    [Test]
-    public void Should_FindElementWithTextTitle2_And_AssertItIsNotNull()
-    {
-        var elementWithTextTitle2By = By.XPath("//*[contains(text(), 'Title 2')]");
-        var elementWithTextTitle2 = _driver.FindElement(elementWithTextTitle2By);
+        var elementWithTextTitle2 = _driver.FindElement(By.XPath("//*[contains(text(), 'Title 2')]"));
         Assert.IsNotNull(elementWithTextTitle2);
-    }
 
-    [Test]
-    public void Should_FindElementH1WithTextTitle3_And_AssertItIsNotNull()
-    {
-        var elementH1WithTextTitle3By = By.XPath("//h1/*[contains(text(), 'Title 3')]");
-        var elementH1WithTextTitle3 = _driver.FindElement(elementH1WithTextTitle3By);
+        var elementH1WithTextTitle3 = _driver.FindElement(By.XPath("//h1/*[contains(text(), 'Title 3')]"));
         Assert.IsNotNull(elementH1WithTextTitle3);
-    }
 
-    [Test]
-    public void Should_FindSecondArrowElementFromBlockWithTextTitle2_And_AssertItIsNotNull()
-    {
-        var secondArrowElementFromBlockWithTextTitle2By =
-            By.XPath("//*[contains(text(), 'Title 2')]/ancestor::div/descendant-or-self::*[@class='arrow'][2]");
-        var secondArrowElementFromBlockWithTextTitle2 =
-            _driver.FindElement(secondArrowElementFromBlockWithTextTitle2By);
+        var secondArrowElementFromBlockWithTextTitle2 = _driver.FindElement(
+            By.XPath("//*[contains(text(), 'Title 2')]/ancestor::div/descendant-or-self::*[@class='arrow'][2]"));
         Assert.IsNotNull(secondArrowElementFromBlockWithTextTitle2);
     }
 
     [Test]
-    public void Should_PrintElementWithTextLocator()
+    public void CSS_Test()
     {
-        var elementWithTextLocatorBy = By.CssSelector("*[id='123']");
-        var elementWithTextLocator = _driver.FindElement(elementWithTextLocatorBy);
+        var elementWithTextLocator = _driver.FindElement(By.CssSelector("*[id='123']"));
         Assert.That(elementWithTextLocator.Text == "Locator");
         Console.WriteLine($"elementWithTextLocator: {elementWithTextLocator}");
-    }
 
-    [Test]
-    public void Should_PrintElementsWithArrowClass_If_ThereAtLeast1Element()
-    {
-        var elementsWithArrowClassBy = By.CssSelector(".arrow");
-        var elementsWithArrowClass = _driver.FindElements(elementsWithArrowClassBy);
+        var elementsWithArrowClass = _driver.FindElements(By.CssSelector(".arrow"));
         Assert.GreaterOrEqual(elementsWithArrowClass.Count, 1);
-        Services.PrintElements(elementsWithArrowClass, ".arrow");
-    }
 
-    [Test]
-    public void Should_PrintElementWithIdEquals123()
-    {
-        var elementWithIdEquals123By = By.CssSelector("[id='123']");
-        var elementWithIdEquals123 = _driver.FindElement(elementWithIdEquals123By);
+        var elementWithIdEquals123 = _driver.FindElement(By.CssSelector("[id='123']"));
         Assert.NotNull(elementWithIdEquals123);
         Console.WriteLine("elementWithIdEquals123: " + elementWithIdEquals123);
-    }
 
-    [Test]
-    public void Should_PrintSpansWithParentH1_If_ThereAtLeast1Element()
-    {
-        var spansWithParentH1By = By.CssSelector("h1 span");
-        var spansWithParentH1 = _driver.FindElements(spansWithParentH1By);
+        var spansWithParentH1 = _driver.FindElements(By.CssSelector("h1 span"));
         Assert.GreaterOrEqual(spansWithParentH1.Count, 1);
-        Services.PrintElements(spansWithParentH1, "h1 span");
-    }
 
-    [Test]
-    public void Should_PrintSpansStartingWith12_If_ThereAtLeast1Element()
-    {
-        var spansStartingWith12By = By.CssSelector("span[value^='12']");
-        var spansStartingWith12 = _driver.FindElements(spansStartingWith12By);
+        var spansStartingWith12 = _driver.FindElements(By.CssSelector("span[value^='12']"));
         Assert.GreaterOrEqual(spansStartingWith12.Count, 1);
-        Services.PrintElements(spansStartingWith12, "span[value^='12']");
     }
 
     [OneTimeTearDown]
