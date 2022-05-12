@@ -1,17 +1,18 @@
 using System;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using PageObject.Buttons;
+using PageObject.Entities;
 using PageObject.Services;
 
 namespace PageObject.Pages;
 
-public class CartPage : BasePage, IHaveBurgerButton, IHaveCartButton, IGoBackButton, IHaveSocialNetworks, IContinueButton
+public class CartPage : BasePage
 {
     private const string _endPoint = "/cart.html";
-    private static readonly By _titleBy = By.ClassName("title");
-    private static readonly By _quantityBy = By.ClassName("cart_quantity");
-    private static readonly By _listOfItemsBy = By.CssSelector("div.inventory_item_name");
+    public IWebElement Title = Driver.FindElement(By.ClassName("title"));
+    public ReadOnlyCollection<IWebElement> ListOfItems = Driver.FindElements(By.CssSelector("div.inventory_item_name"));
+    public IWebElement Quantity = Driver.FindElement(By.ClassName("cart_quantity"));
+    public IWebElement CheckoutButton = Driver.FindElement(By.ClassName(Buttons.ContinueButtonClassName));
 
     public CartPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -35,9 +36,4 @@ public class CartPage : BasePage, IHaveBurgerButton, IHaveCartButton, IGoBackBut
             return false;
         }
     }
-
-    public IWebElement Title = Driver.FindElement(_titleBy);
-    public ReadOnlyCollection<IWebElement> ListOfItems = Driver.FindElements(_listOfItemsBy);
-    public IWebElement Quantity = Driver.FindElement(_quantityBy);
-    public IWebElement CheckoutButton = IContinueButton.FindContinueButton(Driver);
 }

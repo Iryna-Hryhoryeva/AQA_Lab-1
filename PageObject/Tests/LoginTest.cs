@@ -1,6 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
-using PageObject.Buttons;
+using PageObject.Entities;
 using PageObject.Pages;
 using PageObject.Services;
 using PageObject.Utils;
@@ -36,8 +36,7 @@ public class LoginTest : BaseTest
 
         loginPage.LoginButton.Click();
 
-        IErrorMessage.FindErrorMessageForEmptyLogin(Driver,
-            isUsernameFieldEmpty ? loginPage.UsernameInput : loginPage.PasswordInput);
+        Buttons.FindErrorMessageForEmptyLogin(isUsernameFieldEmpty ? loginPage.UsernameInput : loginPage.PasswordInput, Driver);
     }
 
     [Category("Negative")]
@@ -51,7 +50,7 @@ public class LoginTest : BaseTest
 
         loginPage.LoginButton.Click();
 
-        IErrorMessage.FindErrorMessageForInvalidLoginInputs(Driver);
+        Buttons.FindErrorMessageForInvalidLoginInputs(Driver);
     }
     
     private static class InvalidDataForLoginTest

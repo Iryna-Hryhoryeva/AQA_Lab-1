@@ -1,7 +1,7 @@
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using PageObject.Buttons;
+using PageObject.Entities;
 using PageObject.Services;
 
 namespace PageObject.Tests;
@@ -15,14 +15,14 @@ public class LogoutTest : BaseTest
     {
         LoginTest.Should_LogIn_If_ValidInputs();
 
-        var productBy = By.CssSelector(".inventory_list div.inventory_item:nth-child(1) div.inventory_item_img a");
-        var productElement = Driver.FindElement(productBy);
+        var productElement = Driver.FindElement(By.CssSelector(".inventory_list div.inventory_item:nth-child(1) div.inventory_item_img a"));
         productElement.Click();
 
         Thread.Sleep(Configurator.WaitTimeoutInMinutes * 60 * 1000 + 1);
         Driver.Navigate().Refresh();
 
         Assert.That(Driver.Url == Configurator.BaseUrl);
-        IErrorMessage.FindErrorMessageWith("/inventory-item.html?id=4", Driver);
+        
+        Buttons.FindErrorMessageWith("/inventory-item.html?id=4", Driver);
     }
 }

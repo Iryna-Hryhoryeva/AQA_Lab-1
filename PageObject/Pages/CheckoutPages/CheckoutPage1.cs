@@ -1,18 +1,18 @@
 using System;
 using OpenQA.Selenium;
-using PageObject.Buttons;
+using PageObject.Entities;
 using PageObject.Services;
 
 namespace PageObject.Pages.CheckoutPages;
 
-public class CheckoutPage1 : BasePage, IHaveBurgerButton, IHaveCartButton, IGoBackButton, IHaveSocialNetworks,
-    IContinueButton
+public class CheckoutPage1 : BasePage
 {
     private const string _endPoint = "/checkout-step-one.html";
-    private static readonly By _titleBy = By.ClassName("title");
-    private static readonly By _firstName = By.Id("first-name");
-    private static readonly By _lastName = By.Id("last-name");
-    private static readonly By _postalCode = By.Id("postal-code");
+    public IWebElement Title = Driver.FindElement(By.ClassName("title"));
+    public IWebElement FirstName = Driver.FindElement(By.Id("first-name"));
+    public IWebElement LastName = Driver.FindElement(By.Id("last-name"));
+    public IWebElement PostalCode = Driver.FindElement(By.Id("postal-code"));
+    public IWebElement ContinueButton = Driver.FindElement(By.ClassName(Buttons.ContinueButtonClassName));
 
     public CheckoutPage1(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -36,10 +36,4 @@ public class CheckoutPage1 : BasePage, IHaveBurgerButton, IHaveCartButton, IGoBa
             return false;
         }
     }
-
-    public IWebElement Title = Driver.FindElement(_titleBy);
-    public IWebElement FirstName = Driver.FindElement(_firstName);
-    public IWebElement LastName = Driver.FindElement(_lastName);
-    public IWebElement PostalCode = Driver.FindElement(_postalCode);
-    public IWebElement ContinueButton = IContinueButton.FindContinueButton(Driver);
 }

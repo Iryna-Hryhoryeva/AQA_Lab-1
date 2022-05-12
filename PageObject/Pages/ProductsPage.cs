@@ -1,17 +1,16 @@
 using System;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using PageObject.Buttons;
 using PageObject.Services;
 
 namespace PageObject.Pages;
 
-public class ProductsPage : BasePage, IHaveBurgerButton, IHaveCartButton, IHaveSocialNetworks
+public class ProductsPage : BasePage
 {
     private const string _endPoint = "/inventory.html";
-    private static readonly By _titleBy = By.ClassName("title");
-    private static readonly By _productSortContainerBy = By.ClassName("product_sort_container");
-    private static readonly By _eachProductPictureForListOfItemsBy = By.CssSelector("a[id*='_img_link']");
+    public IWebElement ProductSortContainer => Driver.FindElement(By.ClassName("product_sort_container"));
+    public IWebElement Title => Driver.FindElement(By.ClassName("title"));
+    public ReadOnlyCollection<IWebElement> ListOfItems => Driver.FindElements(By.CssSelector("a[id*='_img_link']"));
 
     public ProductsPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -31,12 +30,8 @@ public class ProductsPage : BasePage, IHaveBurgerButton, IHaveCartButton, IHaveS
         catch (Exception e)
         {
             Console.WriteLine(e);
-            
+
             return false;
         }
     }
-
-    public IWebElement ProductSortContainer => Driver.FindElement(_productSortContainerBy);
-    public IWebElement Title => Driver.FindElement(_titleBy);
-    public ReadOnlyCollection<IWebElement> ListOfItems => Driver.FindElements(_eachProductPictureForListOfItemsBy);
 }

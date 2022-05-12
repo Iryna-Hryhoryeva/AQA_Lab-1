@@ -1,23 +1,23 @@
 using System;
 using OpenQA.Selenium;
-using PageObject.Buttons;
+using PageObject.Entities;
 using PageObject.Services;
 
 namespace PageObject.Pages.CheckoutPages;
 
-public class CheckoutPage2 : BasePage, IContinueButton, IGoBackButton, IHaveCartButton, IHaveBurgerButton,
-    IHaveSocialNetworks
+public class CheckoutPage2 : BasePage
 {
     private const string _endPoint = "/checkout-step-two.html";
-    private static readonly By _titleBy = By.ClassName("title");
-    private static readonly By _subtitleQuantityBy = By.ClassName("cart_quantity_label");
-    private static readonly By _subtitleDescription = By.ClassName("cart_desc_label");
-    private static readonly By _paymentInformation = By.XPath("//div[@class = 'summary_info']/*[2]");
-    private static readonly By _shippingInformation = By.XPath("//div[@class = 'summary_info']/*[4]");
-    private static readonly By _itemTotalBy = By.ClassName("summary_subtotal_label");
-    private static readonly By _taxBy = By.ClassName("summary_tax_label");
-    private static readonly By _totalBy = By.ClassName("summary_total_label");
-
+    public IWebElement Title = Driver.FindElement(By.ClassName("title"));
+    public IWebElement SubtitleQuantity = Driver.FindElement(By.ClassName("cart_quantity_label"));
+    public IWebElement SubtitleDescription = Driver.FindElement(By.ClassName("cart_desc_label"));
+    public IWebElement PaymentInformation = Driver.FindElement(By.XPath("//div[@class = 'summary_info']/*[2]"));
+    public IWebElement ShippingInformation = Driver.FindElement(By.XPath("//div[@class = 'summary_info']/*[4]"));
+    public IWebElement ItemTotal = Driver.FindElement(By.ClassName("summary_subtotal_label"));
+    public IWebElement Tax = Driver.FindElement(By.ClassName("summary_tax_label"));
+    public IWebElement Total = Driver.FindElement(By.ClassName("summary_total_label"));
+    public IWebElement FinishButton = Driver.FindElement(By.ClassName(Buttons.ContinueButtonClassName));
+    
     public CheckoutPage2(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
     }
@@ -40,14 +40,4 @@ public class CheckoutPage2 : BasePage, IContinueButton, IGoBackButton, IHaveCart
             return false;
         }
     }
-
-    public IWebElement Title = Driver.FindElement(_titleBy);
-    public IWebElement SubtitleQuantity = Driver.FindElement(_subtitleQuantityBy);
-    public IWebElement SubtitleDescription = Driver.FindElement(_subtitleDescription);
-    public IWebElement PaymentInformation = Driver.FindElement(_paymentInformation);
-    public IWebElement ShippingInformation = Driver.FindElement(_shippingInformation);
-    public IWebElement ItemTotal = Driver.FindElement(_itemTotalBy);
-    public IWebElement Tax = Driver.FindElement(_taxBy);
-    public IWebElement Total = Driver.FindElement(_totalBy);
-    public IWebElement FinishButton = IContinueButton.FindContinueButton(Driver);
 }

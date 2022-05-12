@@ -19,10 +19,8 @@ public class ProductsTest : BaseTest
         var productSortContainer = new SelectElement(productsPage.ProductSortContainer);
         productSortContainer.SelectByValue("lohi");
         
-        var priceOfFirstProductBy = By.CssSelector(".inventory_list div.inventory_item:nth-child(1) div.inventory_item_price");
-        var priceOfFirstProductElement = Driver.FindElement(priceOfFirstProductBy);
-        var priceOfSecondProductBy = By.CssSelector(".inventory_list div.inventory_item:nth-child(2) div.inventory_item_price");
-        var priceOfSecondProductElement = Driver.FindElement(priceOfSecondProductBy);
+        var priceOfFirstProductElement = Driver.FindElement(By.CssSelector(".inventory_list div.inventory_item:nth-child(1) div.inventory_item_price"));
+        var priceOfSecondProductElement = Driver.FindElement(By.CssSelector(".inventory_list div.inventory_item:nth-child(2) div.inventory_item_price"));
         
         var priceOfFirstProduct = RegexFormatter.RemoveOddCharsAndMakeDouble(priceOfFirstProductElement.Text);
         var priceOfSecondProduct = RegexFormatter.RemoveOddCharsAndMakeDouble(priceOfSecondProductElement.Text);
