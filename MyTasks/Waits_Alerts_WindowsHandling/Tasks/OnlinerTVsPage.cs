@@ -9,13 +9,23 @@ namespace Waits_Alerts_WindowsHandling.Tasks;
 public class OnlinerTVsPage : BasePage
 {
     private const string _endPoint = "/tv";
-    private static readonly By _titleBy = By.CssSelector("[class = 'schema-header__title js-schema-header_title']");
-    private static readonly By _checkBoxesBy = By.CssSelector("[class = 'schema-product__control']");
-    private static readonly By _comparisonButtonBy = By.CssSelector("[data-bind = 'html: $root.text']");
-    private static readonly By _vkBy = By.ClassName("footer-style__social-button_vk");
-    private static readonly By _facebookBy = By.ClassName("footer-style__social-button_fb");
-    private static readonly By _twitterBy = By.ClassName("footer-style__social-button_tw");
+    public static ReadOnlyCollection<IWebElement> CheckBoxes => WaitService.WaitElementsPresent(By.CssSelector("[class = 'schema-product__control']"));
+    public IWebElement FirstCheckBoxSelectingTV => CheckBoxes[0];
+    public IWebElement SecondCheckBoxSelectingTV => CheckBoxes[1];
+    public IWebElement ComparisonButton => WaitService.WaitElementIsVisible(By.CssSelector("[data-bind = 'html: $root.text']"));
+    public IWebElement Title => WaitService.WaitElementExists(By.CssSelector("[class = 'schema-header__title js-schema-header_title']"));
 
+    public struct SocialNetworks
+    {
+        public IWebElement VK = WaitService.WaitElementExists(By.ClassName("footer-style__social-button_vk"));
+        public IWebElement Facebook = WaitService.WaitElementExists(By.ClassName("footer-style__social-button_fb"));
+        public IWebElement Twitter = WaitService.WaitElementExists(By.ClassName("footer-style__social-button_tw"));
+
+        public SocialNetworks()
+        {
+        }
+    }
+    
     public OnlinerTVsPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
     }
@@ -36,23 +46,6 @@ public class OnlinerTVsPage : BasePage
             Console.WriteLine(e);
 
             return false;
-        }
-    }
-
-    public static ReadOnlyCollection<IWebElement> CheckBoxes => WaitService.WaitElementsPresent(_checkBoxesBy);
-    public IWebElement FirstCheckBoxSelectingTV => CheckBoxes[0];
-    public IWebElement SecondCheckBoxSelectingTV => CheckBoxes[1];
-    public IWebElement ComparisonButton => WaitService.WaitElementIsVisible(_comparisonButtonBy);
-    public IWebElement Title => WaitService.WaitElementExists(_titleBy);
-
-    public struct SocialNetworks
-    {
-        public IWebElement VK = WaitService.WaitElementExists(_vkBy);
-        public IWebElement Facebook = WaitService.WaitElementExists(_facebookBy);
-        public IWebElement Twitter = WaitService.WaitElementExists(_twitterBy);
-
-        public SocialNetworks()
-        {
         }
     }
 }

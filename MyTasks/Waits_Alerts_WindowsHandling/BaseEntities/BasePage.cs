@@ -8,11 +8,12 @@ namespace Waits_Alerts_WindowsHandling.BaseEntities
     public abstract class BasePage
     {
         private const int _waitForPageLoadingTime = 60;
-        private static readonly By _numberOfOffersButtonBy = By.CssSelector(".button.button_orange");
         [ThreadStatic] private static IWebDriver _driver;
         private static WaitService _waitService;
+        public IWebElement NumberOfOffersButton => WaitService.WaitElementIsVisible(By.CssSelector(".button.button_orange"));
 
         protected abstract void OpenPage();
+        
         protected abstract bool IsPageOpened();
 
         protected BasePage(IWebDriver driver, bool openPageByUrl)
@@ -55,7 +56,5 @@ namespace Waits_Alerts_WindowsHandling.BaseEntities
         {
             get => _waitService;
         }
-
-        public IWebElement NumberOfOffersButton => WaitService.WaitElementIsVisible(_numberOfOffersButtonBy);
     }
 }

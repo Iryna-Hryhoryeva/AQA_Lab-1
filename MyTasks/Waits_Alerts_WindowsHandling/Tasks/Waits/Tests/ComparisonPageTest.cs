@@ -18,31 +18,25 @@ public class ComparisonPageTest : BaseTest
         var actionsProvider = new Actions(Driver);
         actionsProvider.MoveToElement(comparisonPage.ScreenSize).Perform();
 
-        var questionIconBy = By.CssSelector("tr:hover .product-table-tip__trigger");
-        var questionIcon = WaitService.WaitElementExists(questionIconBy);
+        var questionIcon = WaitService.WaitElementExists(By.CssSelector("tr:hover .product-table-tip__trigger"));
 
         actionsProvider.Click(questionIcon).Perform();
 
-        var popupTipBy = By.CssSelector(".product-table-tip__tip_visible");
-        var popupTip = WaitService.WaitElementExists(popupTipBy);
+        var popupTip = WaitService.WaitElementExists(By.CssSelector(".product-table-tip__tip_visible"));
 
         questionIcon.Click();
 
-        var hasPopupTipDisappeared = WaitService.WaitForElementToDisappear(popupTipBy);
+        var hasPopupTipDisappeared = WaitService.WaitForElementToDisappear(By.CssSelector(".product-table-tip__tip_visible"));
         Assert.IsTrue(hasPopupTipDisappeared);
 
-        var deleteItemCrossBy =
-            By.XPath(
-                "//th[@class='product-table__cell']/div[@class='product-table-cell-container']/a[@data-key='oled55c1rla']");
-        var deleteItemCross = WaitService.WaitElementIsVisible(deleteItemCrossBy);
+        var deleteItemCross = WaitService.WaitElementIsVisible(            By.XPath(
+                "//th[@class='product-table__cell']/div[@class='product-table-cell-container']/a[@data-key='oled55c1rla']"));
 
-        var itemToBeDeletedBy =
-            By.XPath("//span[@class='product-summary__caption'][text() = 'OLED телевизор LG OLED55C1RLA']");
-        var itemToBeDeleted = WaitService.WaitElementIsVisible(itemToBeDeletedBy);
+        var itemToBeDeleted = WaitService.WaitElementIsVisible(By.XPath("//span[@class='product-summary__caption'][text() = 'OLED телевизор LG OLED55C1RLA']"));
 
         deleteItemCross.Click();
 
-        var hasItemToBeDeletedDisappeared = WaitService.WaitForElementToDisappear(itemToBeDeletedBy);
+        var hasItemToBeDeletedDisappeared = WaitService.WaitForElementToDisappear(By.XPath("//span[@class='product-summary__caption'][text() = 'OLED телевизор LG OLED55C1RLA']"));
         Assert.IsTrue(hasItemToBeDeletedDisappeared);
 
         WaitService.WaitPageRefreshed("https://catalog.onliner.by/compare/oled65c1rla");
